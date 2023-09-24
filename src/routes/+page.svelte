@@ -6,14 +6,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/pico.min.css">
     <title>Hello, world!</title>
   </head>
   <body>
         <main class="container">
-            <form class="">
+            <form method="post">
                 
-                <h1>Sign up</h1>
+                <h1>Sign up form</h1>
                 <!-- Grid -->
                 <div class="grid">
               

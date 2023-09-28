@@ -1,6 +1,10 @@
-require('dotenv').config()
+import { env } from '$env/dynamic/private';
 import postgres from 'postgres'
 
-const sql = postgres({ process: process.env.PG_CONN }) // will use psql environment variables
+const dbCon = env.PG_CONN;
+
+console.log(dbCon);
+
+const sql = postgres( dbCon, ); // will use psql environment variables
 
 export default sql

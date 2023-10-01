@@ -7,10 +7,13 @@ export const actions = {
         const data = await request.formData()
         const obj = Object.fromEntries(data.entries());
 
+        
         const fName = obj.firstname;
         const lName = obj.lastname;
         const eMail = obj.email;
         
+        console.log(Date(), + obj);
+
         // @ts-ignore
         const addInfo = await sql`
         insert into info

@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-<h1>Rogen Barrow</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-=======
 <script>
     import '@picocss/pico'
 </script>
@@ -45,4 +41,4 @@
         </main>
   </body>
 </html>
->>>>>>> 8d5297d8f283401faa116f354c0b5804ff8d41d9
+

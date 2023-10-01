@@ -1,0 +1,24 @@
+:root {
+    --spacing-company: 3rem;
+    --font-weight: 400;
+    --border-radius: 0;
+  }
+
+  nav {
+      margin-left: 1em;
+      margin-right: 1em;
+}
+
+main {
+    margin-top: 100px;
+  margin-bottom: 100px;
+  margin-right: 150px;
+  margin-left: 80px;
+}
+
+form {
+        width: 100%;
+        text-align: center;
+        border-radius: 16px;
+        overflow: hidden;
+}

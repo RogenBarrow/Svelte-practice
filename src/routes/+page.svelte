@@ -6,9 +6,21 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./src/custom.css" />
     <title>Hello, world!</title>
   </head>
   <body>
+    <div class="hero">
+    <nav class="container=fluid">
+      <ul>
+        <li><strong>Brand</strong></li>
+      </ul>
+      <ul>
+        <li><a href="#">Link</a></li>
+        <li><a href="#">Link</a></li>
+      </ul>
+    </nav>
+  </div>
         <main class="container">
             <form method="post">
                 

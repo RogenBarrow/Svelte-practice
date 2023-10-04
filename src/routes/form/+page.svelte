@@ -16,7 +16,7 @@
         <li><strong>Brand</strong></li>
       </ul>
       <ul>
-        <li><a href="/form">Attandence Submission</a></li>
+        <li><a href="#">Link</a></li>
         <li><a href="#">Link</a></li>
       </ul>
     </nav>
@@ -24,27 +24,33 @@
         <main class="container">
             <form method="post">
                 
-                <h1>Sign up form</h1>
+                <h1>Attendance Submission</h1>
                 <!-- Grid -->
                 <div class="grid">
               
                   <!-- Markup example 1: input is inside label -->
-                  <label for="firstname">
-                    First name
-                    <input type="text" id="firstname" name="firstname" placeholder="First name" required>
+                  <label for="date">Date
+                    <input type="date" id="date" name="date">
                   </label>
               
-                  <label for="lastname">
-                    Last name
-                    <input type="text" id="lastname" name="lastname" placeholder="Last name" required>
+                  <label for="number">
+                    Number of people
+                    <input type="text" id="number" name="number" placeholder="Amount of people" required>
                   </label>
               
                 </div>
               
                 <!-- Markup example 2: input is after label -->
-                <label for="email">Email address</label>
-                <input type="email" id="email" name="email" placeholder="Email address" required>
-                <small>We'll never share your email with anyone else.</small>
+                <label for="name">Name of submitter
+                <input type="name" id="name" name="name" placeholder="name" required>
+              </label>
+
+                <fieldset>
+                  <label for="terms">
+                    <input type="checkbox" id="terms" name="accurate">
+                    Is it accurate?
+                  </label>
+                </fieldset>
               
                 <!-- Button -->
                 <button type="submit">Submit</button>

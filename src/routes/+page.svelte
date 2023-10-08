@@ -13,11 +13,11 @@
     <div class="hero">
     <nav class="container=fluid">
       <ul>
-        <li><strong>Brand</strong></li>
+        <li><a href="/"><strong>Brand</strong></a></li>
       </ul>
       <ul>
         <li><a href="/form">Attandence Submission</a></li>
-        <li><a href="#">Link</a></li>
+        <li><a href="/displaydata">Report</a></li>
       </ul>
     </nav>
   </div>

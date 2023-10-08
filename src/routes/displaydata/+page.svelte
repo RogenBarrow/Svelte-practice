@@ -18,7 +18,7 @@
       </ul>
       <ul>
         <li><a href="/form">Attandence Submission</a></li>
-        <li><a href="/displaydata">Report</a></li>
+        <li><a href="/form">Form Submission</a></li>
       </ul>
     </nav>
   </div>

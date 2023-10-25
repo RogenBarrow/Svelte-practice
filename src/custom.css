@@ -22,3 +22,12 @@ form {
         text-align: center;
         overflow: hidden;
 }
+
+nav {
+  margin-right: 10px;
+}
+
+.datagrid {
+ margin-top: 200px;
+ margin-right: 75px;
+}

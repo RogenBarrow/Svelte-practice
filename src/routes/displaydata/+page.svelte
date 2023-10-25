@@ -1,6 +1,46 @@
 <script>
-    import { messageDelivered } from '$lib/message'
+    //import getSupaData from '$lib/supabaseData';
     import '@picocss/pico'
+    import { Render, Subscribe } from 'svelte-headless-table';
+    import { createTable } from 'svelte-headless-table';
+    import { readable, readonly, writable } from 'svelte/store';
+    export let data;
+
+    
+
+    const cleanData = data.information.content;
+    const amount = writable(cleanData)
+    const table = createTable(amount);
+
+    console.log("this is the clean data: ",cleanData);
+    console.log("this is the table: ", table);
+
+  
+    
+    
+    const columns = table.createColumns([
+      table.column({
+            header: 'Date',
+            accessor: 'date',
+        }),
+        table.column({
+            header: 'Name',
+            accessor: 'name',
+        }),
+        table.column({
+            header: 'Amount',
+            accessor: 'amount',
+        }),
+    ]);
+    
+     const {
+        headerRows,
+        rows,
+        tableAttrs,
+        tableBodyAttrs,
+      } = table.createViewModel(columns);
+
+    
 </script>
 
 <html lang="en">
@@ -22,42 +62,42 @@
       </ul>
     </nav>
   </div>
-        <main class="container">
-            <form method="post">
-                
-                <h1>Attendance Submission</h1>
-                <!-- Grid -->
-                <div class="grid">
-              
-                  <!-- Markup example 1: input is inside label -->
-                  <label for="date">Date
-                    <input type="date" id="date" name="date">
-                  </label>
-              
-                  <label for="number">
-                    Number of people
-                    <input type="text" id="number" name="number" placeholder="Amount of people" required>
-                  </label>
-              
-                </div>
-              
-                <!-- Markup example 2: input is after label -->
-                <label for="name">Name of submitter
-                <input type="name" id="name" name="name" placeholder="name" required>
-              </label>
-
-                <fieldset>
-                  <label for="terms">
-                    <input type="checkbox" id="terms" name="accurate" value="true" required>
-                    Is it accurate?
-                  </label>
-                </fieldset>
-              
-                <!-- Button -->
-                <button type="submit" id="submitform" on:click={messageDelivered} >Submit</button>
-              
-              </form>
-        </main>
-  </body>
+  <main class="datagrid">
+  <table {...$tableAttrs}>
+    <thead>
+      {#each $headerRows as headerRow (headerRow.id)}
+      <Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
+        <tr {...rowAttrs}>
+          {#each headerRow.cells as cell (cell.id)}
+          <Subscribe attrs={cell.attrs()} let:attrs>
+            <th {...attrs}>
+              <Render of={cell.render()} />
+            </th>
+          </Subscribe>
+          {/each}
+        </tr>
+      </Subscribe>
+      {/each}
+    </thead>
+    <tbody {...$tableBodyAttrs}>
+      {#each $rows as row (row.id)}
+      <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
+        <tr {...rowAttrs}>
+          {#each row.cells as cell (cell.id)}
+          <Subscribe attrs={cell.attrs()} let:attrs>
+            <td {...attrs}>
+              <Render of={cell.render()} />
+            </td>
+          </Subscribe>
+          {/each}
+        </tr>
+      </Subscribe>
+      {/each}
+    </tbody>
+  </table>
+  </main>
+</body>
 </html>
+
+
 

@@ -14,6 +14,7 @@ export const actions = {
         
         console.log(Date(), + obj);
 
+
         // @ts-ignore
         const addInfo = await sql`
         insert into info

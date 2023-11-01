@@ -1,10 +1,10 @@
 import getSupaData from '$lib/supabaseData';
 
 
-const data = await getSupaData();
 
-export const load = () => {
+export const load = async () => {
     
+    const data = await getSupaData();
 
     console.log("The data in the load function: ", data);
     

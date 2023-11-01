@@ -14,7 +14,7 @@
     <div class="hero">
     <nav class="container=fluid">
       <ul>
-        <li><a href="/"><strong>Brand</strong></a></li>
+        <li><a href="/"><strong>Arise Church</strong></a></li>
       </ul>
       <ul>
         <li><a href="/form">Attandence Submission</a></li>

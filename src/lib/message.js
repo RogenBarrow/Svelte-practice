@@ -1,4 +1,5 @@
-export const messageDelivered = () => { alert("Form has been submitted") 
+export const messageDelivered = () => {
+    alert('Form has been submitted');
 
-return messageDelivered
+    return messageDelivered;
 };

@@ -1,24 +1,20 @@
-import supabase from "./supabase"
+import supabase from './supabase';
 
- async function getSupaData() {
-const { data, error } = await supabase
-  .from('attendance')
-  .select()
+async function getSupaData() {
+    const { data, error } = await supabase.from('attendance').select();
 
-  if(error) {
-    throw error;
-  };
+    if (error) {
+        throw error;
+    }
 
-//const getSupaData = data;
+    //const getSupaData = data;
 
-console.log("This is the data: ",data);
-console.error("This is the error: ",error);
+    // console.log('This is the data: ', data);
+    // console.error('This is the error: ', error);
 
-return data;
-
-
+    return data;
 }
 
-console.log("This is the function: ", getSupaData);
+console.log('This is the function: ', getSupaData);
 
-export default getSupaData
+export default getSupaData;

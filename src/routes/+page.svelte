@@ -1,5 +1,4 @@
 <script>
-    import Card from '$lib/components/card.svelte';
 import '@picocss/pico'
 </script>
 
@@ -22,9 +21,7 @@ import '@picocss/pico'
       </ul>
     </nav>
   </div>
-        <Card>
-          <p>dssdcsd</p>
-          </Card>
+          
   </body>
 </html>
 

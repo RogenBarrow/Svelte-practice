@@ -2,32 +2,36 @@
     --spacing-company: 3rem;
     --font-weight: 400;
     --border-radius: 0;
-  }
+}
 
-  nav {
-      margin-left: 1em;
-      margin-right: 1em;
-      margin-bottom: -7em;
+nav {
+    margin-left: 1em;
+    margin-right: 1em;
+    margin-bottom: -7em;
 }
 
 main {
     margin-top: 100px;
-  margin-bottom: 100px;
-  margin-right: 150px;
-  margin-left: 80px;
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
 }
 
 form {
-        width: 100%;
-        text-align: center;
-        overflow: hidden;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
 }
 
 nav {
-  margin-right: 20px;
+    margin-right: 20px;
 }
 
 .datagrid {
- margin-top: 150px;
- margin-right: 75px;
+    margin-top: 150px;
+    margin-right: 75px;
+}
+
+article {
+    margin-top: 300px;
 }

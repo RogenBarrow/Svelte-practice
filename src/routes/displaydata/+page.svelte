@@ -12,8 +12,8 @@
     const amount = writable(cleanData)
     const table = createTable(amount);
 
-    console.log("this is the clean data: ",cleanData);
-    console.log("this is the table: ", table);
+    // console.log("this is the clean data: ",cleanData);
+    // console.log("this is the table: ", table);
 
   
     

@@ -2,9 +2,21 @@
 import '@picocss/pico'
 
 
+
+
+function summaryOfAmount() {
+
+
+
+    return summaryOfAmount
+};
+
+
+
+
 </script>
 
-<article>I'm a card!</article>
+<article></article>
 
 <style>
 

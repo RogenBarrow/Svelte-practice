@@ -28,8 +28,20 @@
             accessor: 'name',
         }),
         table.column({
-            header: 'Amount',
+            header: 'Amount attendance',
             accessor: 'amount',
+        }),
+        table.column({
+            header: 'Amount kids',
+            accessor: 'amount_kids',
+        }),
+        table.column({
+            header: 'Amount kids leaders',
+            accessor: 'amount_kids_leader',
+        }),
+        table.column({
+            header: 'Total amount',
+            accessor: 'total_amount',
         }),
     ]);
     

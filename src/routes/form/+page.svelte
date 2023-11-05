@@ -25,7 +25,7 @@
         <main class="container">
             <form method="post">
                 
-                <h1>Attendance Submission</h1>
+                <h1>Arise Attendance Submission</h1>
                 <!-- Grid -->
                 <div class="grid">
               
@@ -35,8 +35,18 @@
                   </label>
               
                   <label for="number">
-                    Number of people
+                    Attandence in Church
                     <input type="text" id="number" name="number" placeholder="Amount of people" required>
+                  </label>
+
+                  <label for="numberkids">
+                    Arise kids
+                    <input type="text" id="number" name="numberkids" placeholder="Arise kids" required>
+                  </label>
+
+                  <label for="numberleader">
+                    Arise kids leaders
+                    <input type="text" id="number" name="numberkidsleaders" placeholder="Arise kids leaders" required>
                   </label>
               
                 </div>

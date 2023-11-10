@@ -4,7 +4,7 @@
 # If you need more help, visit the Dockerfile reference guide at
 # https://docs.docker.com/engine/reference/builder/
 
-ARG NODE_VERSION=y
+ARG NODE_VERSION=20.9.0
 
 ################################################################################
 # Use node image for base image for all stages.
@@ -67,4 +67,4 @@ COPY --from=build /usr/src/app// .//
 EXPOSE 3000
 
 # Run the application.
-CMD npm run build
+CMD docker run

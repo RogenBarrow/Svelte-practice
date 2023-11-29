@@ -89,7 +89,7 @@ COPY --from=build /usr/src/app// ./
 RUN ls -l /usr/src/app/.svelte-kit/tsconfig.json
 
 # Expose the port that the application listens on.
-EXPOSE 3000
+EXPOSE 5173
 
 # Run the application.
 CMD ["npm", "run", "build"]

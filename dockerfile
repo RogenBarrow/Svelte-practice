@@ -96,4 +96,4 @@ EXPOSE 3000
 ENV ORIGIN=http://localhost:3000
 
 # Run the application.
-CMD ["node", "build"]
+CMD ORIGIN=http://localhost:3000 node build

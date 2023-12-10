@@ -82,7 +82,7 @@ COPY package.json .
 # Copy the production dependencies from the deps stage and also
 # the built application from the build stage into the image.
 COPY --from=deps /usr/src/app/node_modules ./node_modules
-COPY --from=build /usr/src/app// ./
+COPY --from=build /usr/src/app/ ./
 #COPY --from=build /usr/src/app/public ./public
 
 # Debugging: Show ownership and permissions of the tsconfig.json file
@@ -92,4 +92,4 @@ RUN ls -l /usr/src/app/.svelte-kit/tsconfig.json
 EXPOSE 5173
 
 # Run the application.
-CMD ["npm", "run", "build"]
+CMD ["node", "build"]

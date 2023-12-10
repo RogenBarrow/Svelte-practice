@@ -88,8 +88,11 @@ COPY --from=build /usr/src/app/ ./
 # Debugging: Show ownership and permissions of the tsconfig.json file
 RUN ls -l /usr/src/app/.svelte-kit/tsconfig.json
 
+# assumes the default SvelteKit host and port
+ENV ORIGIN=http://localhost:3000
+
 # Expose the port that the application listens on.
-EXPOSE 5173
+EXPOSE 3000
 
 # Run the application.
 CMD ["node", "build"]

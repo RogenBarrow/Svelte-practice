@@ -1,65 +1,38 @@
-<script>
+<script lang="ts" >
+// @ts-nocheck
+
+    
     //import getSupaData from '$lib/supabaseData';
     import '@picocss/pico'
     import { Render, Subscribe } from 'svelte-headless-table';
     import { createTable } from 'svelte-headless-table';
     import { readable, readonly, writable } from 'svelte/store';
+    
+    import { Table } from '@skeletonlabs/skeleton';
+    import { TableSource } from '@skeletonlabs/skeleton';
+    import { tableMapperValues } from '@skeletonlabs/skeleton';
+    
     export let data;
-
     
-
     const cleanData = data.information.content;
-    const amount = writable(cleanData)
-    const table = createTable(amount);
 
-    // console.log("this is the clean data: ",cleanData);
-    // console.log("this is the table: ", table);
+    const sourceData =  cleanData; 
 
-  
-    
-    
-    const columns = table.createColumns([
-      table.column({
-            header: 'Date',
-            accessor: 'date',
-        }),
-        table.column({
-            header: 'Name',
-            accessor: 'name',
-        }),
-        table.column({
-            header: 'Amount attendance',
-            accessor: 'amount',
-        }),
-        table.column({
-            header: 'Amount kids',
-            accessor: 'amount_kids',
-        }),
-        table.column({
-            header: 'Amount kids leaders',
-            accessor: 'amount_kids_leader',
-        }),
-        table.column({
-            header: 'Total amount',
-            accessor: 'total_amount',
-        }),
-    ]);
-    
-     const {
-        headerRows,
-        rows,
-        tableAttrs,
-        tableBodyAttrs,
-      } = table.createViewModel(columns);
 
-    
+const tableSimple: TableSource = {
+	// A list of heading labels.
+	head: ['date', 'name', 'amount attendance', 'amount kids', 'amount kids leaders', 'total amount'],
+	// The data visibly shown in your table body UI.
+	body: tableMapperValues(sourceData, ['date', 'name', 'amount', 'amount_kids', 'amount_kids_leader', 'total_amount']),
+	// Optional: The data returned when interactive is enabled and a row is clicked.
+	meta: tableMapperValues(sourceData, ['date', 'name', 'amount', 'amount_kids', 'amount_kids_leader', 'total_amount']),
+};
 </script>
 
 <html lang="en">
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./src/custom.css" />
     <title>Hello, world!</title>
   </head>
   <body>
@@ -75,38 +48,7 @@
     </nav>
   </div>
   <main class="datagrid">
-  <table {...$tableAttrs}>
-    <thead>
-      {#each $headerRows as headerRow (headerRow.id)}
-      <Subscribe rowAttrs={headerRow.attrs()} let:rowAttrs>
-        <tr {...rowAttrs}>
-          {#each headerRow.cells as cell (cell.id)}
-          <Subscribe attrs={cell.attrs()} let:attrs>
-            <th {...attrs}>
-              <Render of={cell.render()} />
-            </th>
-          </Subscribe>
-          {/each}
-        </tr>
-      </Subscribe>
-      {/each}
-    </thead>
-    <tbody {...$tableBodyAttrs}>
-      {#each $rows as row (row.id)}
-      <Subscribe rowAttrs={row.attrs()} let:rowAttrs>
-        <tr {...rowAttrs}>
-          {#each row.cells as cell (cell.id)}
-          <Subscribe attrs={cell.attrs()} let:attrs>
-            <td {...attrs}>
-              <Render of={cell.render()} />
-            </td>
-          </Subscribe>
-          {/each}
-        </tr>
-      </Subscribe>
-      {/each}
-    </tbody>
-  </table>
+    <Table source={tableSimple} />
   </main>
 </body>
 </html>

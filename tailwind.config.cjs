@@ -4,6 +4,8 @@ import { join } from 'path';
 
 // 1. Import the Skeleton plugin
 import { skeleton } from '@skeletonlabs/tw-plugin';
+import forms from '@tailwindcss/forms';
+
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -21,9 +23,11 @@ export default {
 		extend: {},
 	},
 	plugins: [
-		// 4. Append the Skeleton plugin (after other plugins)
-		skeleton
-	]
+        skeleton({
+            themes: { preset: [ "gold-nouveau" ] }
+        }),
+        forms
+    ]
 }
 						
 

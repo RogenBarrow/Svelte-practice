@@ -1,67 +1,91 @@
 <script>
-    import { messageDelivered } from '$lib/message'
-    import '@picocss/pico'
+    import { messageDelivered } from '$lib/message';
 </script>
 
 <html lang="en">
-  <body>
-    <div class="hero">
-    <nav class="container=fluid">
-      <ul>
-        <li><a href="/"><strong>Arise Church</strong></a></li>
-      </ul>
-      <ul>
-        <li><a href="/form">Attandence Submission</a></li>
-        <li><a href="/displaydata">Report</a></li>
-      </ul>
-    </nav>
-  </div>
-        <main class="container">
+    <body>
+        <main class="object-center card p-4 w-2/4 h-3/4">
             <form method="post">
-                
                 <h1>Arise Attendance Submission</h1>
                 <!-- Grid -->
-                <div class="grid">
-              
-                  <!-- Markup example 1: input is inside label -->
-                  <label for="date">Date
-                    <input type="date" id="date" name="date">
-                  </label>
-              
-                  <label for="number">
-                    Attandence in Church
-                    <input type="text" id="number" name="number" placeholder="Amount of people" required>
-                  </label>
+                <div>
+                    <!-- Markup example 1: input is inside label -->
+                    <label class="object-center label" for="date"
+                        >Date
+                        <input
+                            class="input"
+                            title="Input (date)"
+                            type="date"
+                            name="date"
+                            required
+                        />
+                    </label>
 
-                  <label for="numberkids">
-                    Arise kids
-                    <input type="text" id="number" name="numberkids" placeholder="Arise kids" required>
-                  </label>
+                    <label class="label">
+                        <span>Attandence in Church</span>
+                        <input
+                            class="input"
+                            title="Input (number)"
+                            type="number"
+                            name="number"
+                            required
+                        />
+                    </label>
 
-                  <label for="numberleader">
-                    Arise kids leaders
-                    <input type="text" id="number" name="numberkidsleaders" placeholder="Arise kids leaders" required>
-                  </label>
-              
+                    <label class="label">
+                        <span> Arise kids</span>
+                        <input
+                            class="input"
+                            title="Input (number)"
+                            type="number"
+                            name="numberkids"
+                            required
+                        />
+                    </label>
+
+                    <label class="label">
+                        <span> Arise kids leaders</span>
+                        <input
+                            class="input"
+                            title="Input (number)"
+                            type="number"
+                            name="numberkidsleaders"
+                            required
+                        />
+                    </label>
+
+                    <label class="label">
+                        <span> Name of submitter</span>
+                        <input
+                            class="input"
+                            title="Input (text)"
+                            type="text"
+                            name="name"
+                            required
+                        />
+                    </label>
+
+                    <div class="space-y-2">
+                        <label class="flex items-center space-x-2">
+                            <input
+                                class="checkbox"
+                                type="checkbox"
+                                name="accurate"
+                                required
+                            />
+                            <p>Is it accurate?</p>
+                        </label>
+                    </div>
+
+                    <!-- Button -->
+                    <button
+                        class="btn variant-filled bg-primary-500"
+                        type="submit"
+                        id="submitform"
+                        on:click={messageDelivered}>Submit</button
+                    >
                 </div>
-              
-                <!-- Markup example 2: input is after label -->
-                <label for="name">Name of submitter
-                <input type="name" id="name" name="name" placeholder="name" required>
-              </label>
-
-                <fieldset>
-                  <label for="terms">
-                    <input type="checkbox" id="terms" name="accurate" value="true" required>
-                    Is it accurate?
-                  </label>
-                </fieldset>
-              
-                <!-- Button -->
-                <button type="submit" id="submitform" on:click={messageDelivered} >Submit</button>
-              
-              </form>
+            </form>
         </main>
-  </body>
+    </body>
 </html>
-

@@ -29,7 +29,7 @@ export const actions = {
         console.log("this is the amount: ", amount);
 
         const { error } = await supabase
-            .from('attendance')
+            .from('attendancetest')
             .insert({
                 date: actDate,
                 amount: actNumber,

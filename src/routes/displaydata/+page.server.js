@@ -1,4 +1,5 @@
 import getSupaData from '$lib/supabaseData';
+import { data } from 'autoprefixer';
 
 export const load = async () => {
     const data = await getSupaData();
@@ -8,8 +9,6 @@ export const load = async () => {
     // console.log('The data in the load function: ', data);
 
     return {
-        information: {
-            content: data,
-        },
+        supaData: data,
     };
 };

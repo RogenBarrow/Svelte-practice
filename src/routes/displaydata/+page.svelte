@@ -50,7 +50,10 @@
 <html lang="en">
     <body>
         <div class="card p-4 table-compact">
-            <Table class="table table-hover w-screen" source={tableSimple} />
+            <Table
+                class="table table-hover w-screen h-screen"
+                source={tableSimple}
+            />
         </div>
     </body>
 </html>

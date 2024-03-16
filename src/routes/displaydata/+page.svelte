@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { pdfPrint } from '$lib/components/pdf.js';
     // @ts-nocheck
 
     //import getSupaData from '$lib/supabaseData';
@@ -13,7 +14,6 @@
     export let data;
 
     const cleanData = data.supaData;
-
     const sourceData = cleanData;
 
     const tableSimple: TableSource = {
@@ -49,7 +49,10 @@
 
 <html lang="en">
     <body>
-        <div class="card p-4 table-compact">
+        <button type="button" class="btn variant-filled" on:click={pdfPrint}
+            >Download</button
+        >
+        <div id="pdf">
             <Table class="table table-hover w-screen" source={tableSimple} />
         </div>
     </body>

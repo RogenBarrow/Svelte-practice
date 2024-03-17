@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import { AppShell } from '@skeletonlabs/skeleton';
     import '../app.pcss';
     import img from '$lib/img/Arise.png';
@@ -116,6 +116,22 @@
                 >
             </div>
         </div>
+        <script lang="ts">
+            document.addEventListener('DOMContentLoaded', function () {
+                const mobileMenuButton = document.querySelector(
+                    '[aria-controls="mobile-menu"]'
+                )!;
+                const mobileMenu = document.getElementById('mobile-menu')!;
+
+                mobileMenuButton.addEventListener('click', function () {
+                    if (mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.remove('hidden');
+                    } else {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+            });
+        </script>
     </nav>
     <slot />
 </AppShell>

@@ -1,10 +1,6 @@
 <script lang="ts">
+    import { pdfPrint } from '$lib/components/pdf.js';
     // @ts-nocheck
-
-    //import getSupaData from '$lib/supabaseData';
-    // import { Render, Subscribe } from 'svelte-headless-table';
-    // import { createTable } from 'svelte-headless-table';
-    // import { readable, readonly, writable } from 'svelte/store';
 
     import { Table } from '@skeletonlabs/skeleton';
     import type { TableSource } from '@skeletonlabs/skeleton';
@@ -13,7 +9,6 @@
     export let data;
 
     const cleanData = data.supaData;
-
     const sourceData = cleanData;
 
     const tableSimple: TableSource = {
@@ -49,11 +44,13 @@
 
 <html lang="en">
     <body>
-        <div class="card p-4 table-compact">
-            <Table
-                class="table table-hover w-screen h-screen"
-                source={tableSimple}
-            />
+        <button
+            type="button"
+            class="btn variant-filled bg-primary-500 float-right mr-4 mb-2"
+            on:click={pdfPrint}>Download PDF</button
+        >
+        <div id="pdf">
+            <Table class="table table-hover w-screen" source={tableSimple} />
         </div>
     </body>
 </html>

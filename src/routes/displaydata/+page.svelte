@@ -2,11 +2,6 @@
     import { pdfPrint } from '$lib/components/pdf.js';
     // @ts-nocheck
 
-    //import getSupaData from '$lib/supabaseData';
-    // import { Render, Subscribe } from 'svelte-headless-table';
-    // import { createTable } from 'svelte-headless-table';
-    // import { readable, readonly, writable } from 'svelte/store';
-
     import { Table } from '@skeletonlabs/skeleton';
     import type { TableSource } from '@skeletonlabs/skeleton';
     import { tableMapperValues } from '@skeletonlabs/skeleton';
@@ -49,8 +44,10 @@
 
 <html lang="en">
     <body>
-        <button type="button" class="btn variant-filled" on:click={pdfPrint}
-            >Download</button
+        <button
+            type="button"
+            class="btn variant-filled bg-primary-500 float-right mr-4 mb-2"
+            on:click={pdfPrint}>Download PDF</button
         >
         <div id="pdf">
             <Table class="table table-hover w-screen" source={tableSimple} />

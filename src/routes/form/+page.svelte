@@ -7,7 +7,7 @@
     <body class="w-screen">
         <div class="flex justify-center mt-10">
             <main class="object-center card p-4 w-2/4 h-3/4">
-                <form method="post" on:submit|preventDefault={handleSubmit}>
+                <form method="post" on:submit={handleSubmit}>
                     <h1 class="text-center">Arise Attendance Submission</h1>
                     <!-- Grid -->
                     <div>

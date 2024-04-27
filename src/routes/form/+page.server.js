@@ -7,7 +7,7 @@ export const actions = {
     default: async ({ request }) => {
         const insertData = await request.formData();
         const obj = Object.fromEntries(insertData.entries());
-        
+
         console.log(obj);
 
         const actDate = obj.date;
@@ -26,19 +26,17 @@ export const actions = {
 
         const amount = sumOfAll(actNumber, actNumberKids, actNumberKidsleaders);
 
-        console.log("this is the amount: ", amount);
+        console.log('this is the amount: ', amount);
 
-        const { error } = await supabase
-            .from('attendance')
-            .insert({
-                date: actDate,
-                amount: actNumber,
-                amount_kids: actNumberKids,
-                amount_kids_leader: actNumberKidsleaders,
-                total_amount: amount,
-                name: actName,
-                accurate: actRate,
-            });
+        const { error } = await supabase.from('attendancetest').insert({
+            date: actDate,
+            amount: actNumber,
+            amount_kids: actNumberKids,
+            amount_kids_leader: actNumberKidsleaders,
+            total_amount: amount,
+            name: actName,
+            accurate: actRate,
+        });
 
         if (error) {
             throw error;

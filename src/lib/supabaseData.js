@@ -1,7 +1,7 @@
 import supabase from './supabase';
 
 async function getSupaData() {
-    const { data, error } = await supabase.from('attendance').select();
+    const { data, error } = await supabase.from('attendancetest').select();
 
     if (error) {
         throw error;

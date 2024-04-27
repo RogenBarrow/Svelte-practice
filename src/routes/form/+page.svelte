@@ -1,12 +1,13 @@
 <script>
     import { messageDelivered } from '$lib/message';
+    import handleSubmit from '$lib/components/handleSubmit';
 </script>
 
 <html lang="en">
     <body class="w-screen">
         <div class="flex justify-center mt-10">
             <main class="object-center card p-4 w-2/4 h-3/4">
-                <form method="post">
+                <form method="post" on:submit|preventDefault={handleSubmit}>
                     <h1 class="text-center">Arise Attendance Submission</h1>
                     <!-- Grid -->
                     <div>
@@ -62,6 +63,7 @@
                                 title="Input (text)"
                                 type="text"
                                 name="name"
+                                pattern="[A-Za-z]+"
                                 required
                             />
                         </label>
@@ -82,8 +84,7 @@
                         <button
                             class="btn variant-filled bg-primary-500"
                             type="submit"
-                            id="submitform"
-                            on:click={messageDelivered}>Submit</button
+                            id="submitform">Submit</button
                         >
                     </div>
                 </form>

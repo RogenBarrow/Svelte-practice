@@ -1,5 +1,4 @@
 <script>
-    import { messageDelivered } from '$lib/message';
     import handleSubmit from '$lib/components/handleSubmit';
 </script>
 

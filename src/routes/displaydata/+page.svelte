@@ -1,5 +1,6 @@
 <script lang="ts">
     import { pdfPrint } from '$lib/components/pdf.js';
+    import metaData from '$lib/components/rowMetaData.js';
     // @ts-nocheck
 
     import { Table } from '@skeletonlabs/skeleton';
@@ -32,6 +33,7 @@
         ]),
         // Optional: The data returned when interactive is enabled and a row is clicked.
         meta: tableMapperValues(sourceData, [
+            'id',
             'date',
             'name',
             'amount',
@@ -50,7 +52,12 @@
             on:click={pdfPrint}>Download PDF</button
         >
         <div id="pdf">
-            <Table class="table table-hover w-screen" source={tableSimple} />
+            <Table
+                class="table table-hover w-screen"
+                source={tableSimple}
+                interactive={true}
+                on:selected={metaData}
+            />
         </div>
     </body>
 </html>

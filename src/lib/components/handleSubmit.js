@@ -1,3 +1,5 @@
+import { messageDelivered } from '$lib/message';
+
 /**
  * @param {{ preventDefault: () => void; }} event
  */
@@ -10,6 +12,7 @@ function handleSubmit(event) {
         alert('Name field cannot contain numbers!');
         event.preventDefault(); // Stop the form submission
     }
+    messageDelivered();
 }
 
 export default handleSubmit;

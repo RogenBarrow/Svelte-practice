@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
     import { pdfPrint } from '$lib/components/pdf.js';
     import metaData from '$lib/components/rowMetaData.js';
     // @ts-nocheck
@@ -32,15 +33,7 @@
             'total_amount',
         ]),
         // Optional: The data returned when interactive is enabled and a row is clicked.
-        meta: tableMapperValues(sourceData, [
-            'id',
-            'date',
-            'name',
-            'amount',
-            'amount_kids',
-            'amount_kids_leader',
-            'total_amount',
-        ]),
+        meta: tableMapperValues(sourceData, ['id']),
     };
 </script>
 
@@ -55,8 +48,8 @@
             <Table
                 class="table table-hover w-screen"
                 source={tableSimple}
-                interactive={true}
-                on:selected={metaData}
+                interactive
+                on:selected={(event) => goto(`/displaydata/${event.detail}`)}
             />
         </div>
     </body>

@@ -1,11 +1,5 @@
-import getSummary from "../lib/dataPerMonth";
+//import { URLSearchParams } from 'url';
 
-export const load = async () => {
-    const totalAttendance = await getSummary();
-
-    console.log("Total: ",totalAttendance);
-    return {
-        attendance: totalAttendance,
-
-    };
+export const load = async ({ route }) => {
+    console.log('This is the path data: ', route.id);
 };

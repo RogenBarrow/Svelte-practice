@@ -5,7 +5,7 @@
 </script>
 
 <AppShell>
-    <nav class="bg-white-800">
+    <nav class="bg-white justify-center">
         <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
             <div class="relative flex h-16 items-center justify-between">
                 <div
@@ -18,13 +18,8 @@
                         aria-controls="mobile-menu"
                         aria-expanded="false"
                     >
-                        <span class="absolute -inset-0.5"></span>
                         <span class="sr-only">Open main menu</span>
-                        <!--
-            Icon when menu is closed.
-
-            Menu open: "hidden", Menu closed: "block"
-          -->
+                        <!-- Icon when menu is closed. Menu open: "hidden", Menu closed: "block" -->
                         <svg
                             class="block h-6 w-6"
                             fill="none"
@@ -39,11 +34,7 @@
                                 d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
                             />
                         </svg>
-                        <!--
-            Icon when menu is open.
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
+                        <!-- Icon when menu is open. Menu open: "block", Menu closed: "hidden" -->
                         <svg
                             class="hidden h-6 w-6"
                             fill="none"
@@ -95,8 +86,8 @@
             </div>
         </div>
 
-        <!-- Mobile menu, show/hide based on menu state. -->
-        <div class="sm:hidden" id="mobile-menu">
+        <!-- Mobile menu, hidden by default -->
+        <div class="sm:hidden hidden" id="mobile-menu">
             <div class="space-y-1 px-2 pb-3 pt-2">
                 <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
                 <a
@@ -124,14 +115,18 @@
                 const mobileMenu = document.getElementById('mobile-menu')!;
 
                 mobileMenuButton.addEventListener('click', function () {
-                    if (mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.remove('hidden');
-                    } else {
-                        mobileMenu.classList.add('hidden');
-                    }
+                    const isExpanded =
+                        mobileMenuButton.getAttribute('aria-expanded') ===
+                        'true';
+                    mobileMenuButton.setAttribute(
+                        'aria-expanded',
+                        String(!isExpanded)
+                    );
+                    mobileMenu.classList.toggle('hidden');
                 });
             });
         </script>
     </nav>
+
     <slot />
 </AppShell>

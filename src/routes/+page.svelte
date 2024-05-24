@@ -7,7 +7,9 @@
 <html lang="en">
     <body>
         <div class="flex justify-center">
-            <div class="card mt-10 mx-10 h-1/4 w-auto">
+            <div
+                class="card mt-10 mx-10 h-1/4 w-auto drop-shadow-md bg-white border-black"
+            >
                 <header class="card-header text-center font-black">
                     Attendance for this month
                 </header>

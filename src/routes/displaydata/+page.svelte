@@ -1,5 +1,7 @@
 <script lang="ts">
+    import { goto } from '$app/navigation';
     import { pdfPrint } from '$lib/components/pdf.js';
+    import metaData from '$lib/components/rowMetaData.js';
     // @ts-nocheck
 
     import { Table } from '@skeletonlabs/skeleton';
@@ -31,14 +33,7 @@
             'total_amount',
         ]),
         // Optional: The data returned when interactive is enabled and a row is clicked.
-        meta: tableMapperValues(sourceData, [
-            'date',
-            'name',
-            'amount',
-            'amount_kids',
-            'amount_kids_leader',
-            'total_amount',
-        ]),
+        meta: tableMapperValues(sourceData, ['id']),
     };
 </script>
 
@@ -50,7 +45,12 @@
             on:click={pdfPrint}>Download PDF</button
         >
         <div id="pdf">
-            <Table class="table table-hover w-screen" source={tableSimple} />
+            <Table
+                class="table table-hover w-screen"
+                source={tableSimple}
+                interactive
+                on:selected={(event) => goto(`/displaydata/${event.detail}`)}
+            />
         </div>
     </body>
 </html>

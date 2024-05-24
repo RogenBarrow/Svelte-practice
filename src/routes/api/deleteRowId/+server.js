@@ -1,4 +1,4 @@
-import deleteRowByiD from '$lib/components/server/database/deleteRowById.js';
+import deleteRowByiD from '$lib/components/server/database/deleteRowById';
 
 import { json } from '@sveltejs/kit';
 

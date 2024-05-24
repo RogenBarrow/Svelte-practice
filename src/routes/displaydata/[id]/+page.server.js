@@ -1,23 +1,26 @@
-import getRowiD from "../../../lib/components/server/database/getRowId";
+import { error, redirect } from '@sveltejs/kit';
+import getRowiD from '../../../lib/components/server/database/getRowId';
 
-export async function load({ url }) {
-    const urlPath = url.pathname;
-    const splitTheData = urlPath.split('/');
-    const id = splitTheData.pop();
-    
+export async function load({ url, params }) {
+    const id = params.id;
 
-    const getDataofRowId = getRowiD(id)
-    console.log(getDataofRowId)
+    const data = await getRowiD(id);
 
-
-    // const data = await fetch(urlPathId).then((rowData) => {
-    //     if (!rowData.ok) {
-    //         throw new Error('Rosponse was not completed');
-    //     }
-    //     return rowData.json();
-    // });
-    // return {
-    //     rowDataForDisplay: data,
-    // };
-    //console.log('Row Information: ', rowId);
+    return data;
 }
+
+export const actions = {
+    default: async ({ request }) => {
+        const insertData = await request.formData();
+        const obj = Object.fromEntries(insertData.entries());
+
+        console.log('The object data: ', obj, insertData);
+
+        if (error) {
+            console.error('Error deleting record:', error);
+            return { success: false, error: error.message };
+        }
+
+        throw redirect(303, '/'); // Redirect to the home page
+    },
+};

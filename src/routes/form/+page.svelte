@@ -5,16 +5,16 @@
 <html lang="en">
     <body class="w-screen">
         <div class="flex justify-center mt-10">
-            <main class="object-center card p-4 w-2/4 h-3/4">
+            <main class="">
                 <form method="post" on:submit={handleSubmit}>
-                    <h1 class="text-center">Arise Attendance Submission</h1>
+                    <h1 class="text-center h3">Arise Attendance Submission</h1>
                     <!-- Grid -->
                     <div>
                         <!-- Markup example 1: input is inside label -->
                         <label class="object-center label" for="date"
                             >Date
                             <input
-                                class="input"
+                                class="input bg-white"
                                 title="Input (date)"
                                 type="date"
                                 name="date"
@@ -25,7 +25,7 @@
                         <label class="label">
                             <span>Attandence in Church</span>
                             <input
-                                class="input"
+                                class="input bg-white"
                                 title="Input (number)"
                                 type="number"
                                 name="number"
@@ -36,7 +36,7 @@
                         <label class="label">
                             <span> Arise kids</span>
                             <input
-                                class="input"
+                                class="input bg-white"
                                 title="Input (number)"
                                 type="number"
                                 name="numberkids"
@@ -47,7 +47,7 @@
                         <label class="label">
                             <span> Arise kids leaders</span>
                             <input
-                                class="input"
+                                class="input bg-white"
                                 title="Input (number)"
                                 type="number"
                                 name="numberkidsleaders"
@@ -58,7 +58,7 @@
                         <label class="label">
                             <span> Name of submitter</span>
                             <input
-                                class="input"
+                                class="input bg-white"
                                 title="Input (text)"
                                 type="text"
                                 name="name"
@@ -67,10 +67,10 @@
                             />
                         </label>
 
-                        <div class="space-y-2 m-2">
+                        <div class="space-y-2 mt-2">
                             <label class="flex items-center space-x-2">
                                 <input
-                                    class="checkbox"
+                                    class="checkbox bg-white"
                                     type="checkbox"
                                     name="accurate"
                                     required
@@ -81,7 +81,7 @@
 
                         <!-- Button -->
                         <button
-                            class="btn variant-filled bg-primary-500"
+                            class="btn variant-filled bg-primary-600 mt-2"
                             type="submit"
                             id="submitform">Submit</button
                         >

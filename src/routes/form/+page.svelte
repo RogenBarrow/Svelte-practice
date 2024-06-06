@@ -1,12 +1,11 @@
 <script>
-    import handleSubmit from '$lib/components/handleSubmit';
 </script>
 
 <html lang="en">
     <body class="w-screen">
         <div class="flex justify-center mt-10">
             <main class="">
-                <form method="post" on:submit={handleSubmit}>
+                <form method="post">
                     <h1 class="text-center h3">Arise Attendance Submission</h1>
                     <!-- Grid -->
                     <div>

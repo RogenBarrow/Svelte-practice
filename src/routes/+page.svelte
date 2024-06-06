@@ -1,23 +1,23 @@
 <script>
-    export let data;
-    const amount = data.attendance;
-    console.log('On page: ', amount);
+    import BarComponent from '$lib/components/barComponent.svelte';
+    import Hero from '$lib/hero.svelte';
 </script>
 
 <html lang="en">
     <body>
-        <div class="flex justify-center">
-            <div
-                class="card mt-10 mx-10 h-1/4 w-auto drop-shadow-md bg-white border-black"
-            >
-                <header class="card-header text-center font-black">
-                    Attendance for this month
-                </header>
-                <section class="p-4 text-center font-extrabold">
-                    {amount}
-                </section>
-                <footer class="card-footer text-center"></footer>
-            </div>
+        <Hero
+            title=""
+            subtitle=""
+            backgroundImage="src/lib/img/arise-hero.jpg"
+        />
+        <div class="">
+            <BarComponent />
         </div>
     </body>
 </html>
+
+<style>
+    :global(body) {
+        margin: 0;
+    }
+</style>

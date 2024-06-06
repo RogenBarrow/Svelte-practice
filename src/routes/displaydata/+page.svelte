@@ -18,18 +18,18 @@
         head: [
             'date',
             'name',
-            'amount attendance',
-            'amount kids',
-            'amount kids leaders',
+            //'amount attendance',
+            //'amount kids',
+            //'amount kids leaders',
             'total amount',
         ],
         // The data visibly shown in your table body UI.
         body: tableMapperValues(sourceData, [
             'date',
             'name',
-            'amount',
-            'amount_kids',
-            'amount_kids_leader',
+            //'amount',
+            //'amount_kids',
+            //'amount_kids_leader',
             'total_amount',
         ]),
         // Optional: The data returned when interactive is enabled and a row is clicked.
@@ -39,18 +39,26 @@
 
 <html lang="en">
     <body>
-        <button
-            type="button"
-            class="btn variant-filled bg-primary-500 float-right mr-4 mb-2"
-            on:click={pdfPrint}>Download PDF</button
-        >
-        <div id="pdf">
-            <Table
-                class="table table-hover w-screen"
-                source={tableSimple}
-                interactive
-                on:selected={(event) => goto(`/displaydata/${event.detail}`)}
-            />
-        </div>
-    </body>
+        <div class="">
+            <button
+                type="button"
+                class="btn variant-filled bg-primary-500 ml-12 mb-2"
+                on:click={pdfPrint}>Download PDF</button
+            >
+            <div />
+            <div class="flex flex-row">
+                <div class="basis-1/3"></div>
+                <div id="pdf">
+                    <Table
+                        class="table table-hover max-w-screen-md basis-1/3"
+                        source={tableSimple}
+                        interactive
+                        on:selected={(event) =>
+                            goto(`/displaydata/${event.detail}`)}
+                    />
+                </div>
+                <div class="basis-1/3"></div>
+            </div>
+        </div></body
+    >
 </html>

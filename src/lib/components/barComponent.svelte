@@ -24,9 +24,6 @@
             console.error('Error:', error);
         }
     }
-
-    const result = await filterData();
-    console.log('This is the result: ', result);
 </script>
 
 <script lang="ts">

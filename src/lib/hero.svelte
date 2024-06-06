@@ -1,10 +1,10 @@
 <script>
     export let title = 'Welcome to My SvelteKit App';
     export let subtitle = 'This is a hero section created with SvelteKit.';
-    export let backgroundImage = 'static/arise-hero.JPG';
+    export let backgroundImage = 'static/arise-hero.jpg';
 </script>
 
-<div class="hero">
+<div class="hero" style="background-image: url('{backgroundImage}')">
     <div class="overlay"></div>
     <div class="content">
         <h1>{title}</h1>
@@ -15,10 +15,9 @@
 <style>
     .hero {
         position: relative;
-        background-image: url('{backgroundImage}');
         background-size: cover;
         background-position: center;
-        height: 100vh;
+        height: 50vh;
         display: flex;
         flex-direction: column;
         align-items: center;

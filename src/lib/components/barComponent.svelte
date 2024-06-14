@@ -6,28 +6,19 @@
 
     async function filterData() {
         try {
-            // Fetch data asynchronously and await the result
-            const sumTotalPromise = fetchDataForSum();
-
-            // Wait for the sumTotalPromise to resolve to get the actual value
-            const sumTotal = await sumTotalPromise;
-
-            console.log('sumTotal: ', sumTotal);
-
-            // Now that sumTotal is an array, you can pass it to another function
+            const sumTotal = await fetchDataForSum();
             const result = sumTotalAmountByMonth(sumTotal);
-
-            console.log('Its this: ', result);
             return result;
         } catch (error) {
-            // Handle errors
             console.error('Error:', error);
+            return null;
         }
     }
 </script>
 
 <script lang="ts">
-    // Define a type for the monthlyData object
+    import { writable } from 'svelte/store';
+
     type MonthlyData = {
         January: number;
         February: number;
@@ -43,7 +34,6 @@
         December: number;
     };
 
-    // Initialize the monthly data object
     let monthlyData: MonthlyData = {
         January: 0,
         February: 0,
@@ -59,28 +49,20 @@
         December: 0,
     };
 
-    // Map the result object to monthlyData
-    onMount(async () => {
-        const result = await filterData();
-        console.log('result in the mount: ', result);
+    const result = writable<Record<string, number> | null>(null);
 
-        if (result) {
-            for (const [key, value] of Object.entries(result)) {
-                const [year, month] = key.split('-');
-                const monthIndex = parseInt(month) - 1;
-                const date = new Date(parseInt(year), monthIndex, 1);
-                const monthName = date.toLocaleString('default', {
-                    month: 'long',
-                });
-                monthlyData[monthName] = value;
-                console.log('The months: ', monthName);
-                console.log('The values are here', value);
-            }
+    onMount(async () => {
+        const data = await filterData();
+        if (data) {
+            result.set(data);
+            updateMonthlyData(data);
         }
     });
 
-    // Map the result object to monthlyData based on selected year
-    function mapResultToMonthlyData(selectedYear: number) {
+    function updateMonthlyData(
+        data: Record<string, number>,
+        selectedYear?: number
+    ) {
         monthlyData = {
             January: 0,
             February: 0,
@@ -96,33 +78,37 @@
             December: 0,
         };
 
-        if (result) {
-            for (const [key, value] of Object.entries(result)) {
-                const [year, month] = key.split('-').map(Number);
-                if (year === selectedYear) {
-                    const monthIndex = month - 1; // Months are 0-indexed in JavaScript Date objects
-                    const date = new Date(year, monthIndex, 1); // Set the date to the 1st day of the month
-                    const monthName = date.toLocaleString('default', {
-                        month: 'long',
-                    });
-                    monthlyData[monthName] = value;
-                }
+        for (const [key, value] of Object.entries(data)) {
+            const [year, month] = key.split('-').map(Number);
+            if (!selectedYear || year === selectedYear) {
+                const monthIndex = month - 1;
+                const date = new Date(year, monthIndex, 1);
+                const monthName = date.toLocaleString('default', {
+                    month: 'long',
+                });
+                monthlyData[monthName] += value;
             }
         }
     }
 
-    // Handle the change event of the select input
     function handleYearChange(event: Event) {
         const selectedYear = parseInt(
             (event.target as HTMLSelectElement).value
         );
-        mapResultToMonthlyData(selectedYear);
+        if (selectedYear) {
+            result.subscribe((data) => {
+                if (data) {
+                    updateMonthlyData(data, selectedYear);
+                }
+            });
+        } else {
+            result.subscribe((data) => {
+                if (data) {
+                    updateMonthlyData(data);
+                }
+            });
+        }
     }
-
-    onMount(async () => {
-        result = await filterData();
-        console.log('result in the mount: ', result);
-    });
 </script>
 
 <div class="flex flex-col">
@@ -137,20 +123,23 @@
         </div>
     </div>
 
-    {#if Object.keys(monthlyData).length > 0}
+    {#if Object.keys(monthlyData).some((key) => monthlyData[key] > 0)}
         <div class="flex flex-col">
             {#each Object.entries(monthlyData) as [month, value]}
                 <div class="flex flex-col items-center m-2">
                     <div class="w-6/12 justify-center">
                         <p>{month}</p>
                         <p class="content-right">{value}</p>
-                        <!-- Adjust max based on expected data range -->
                         <ProgressBar {value} max={1200} />
                     </div>
                 </div>
             {/each}
         </div>
     {:else}
-        <p>No data available for the selected year.</p>
+        <div class="flex flex-col items-center m-2">
+            <div class="w-6/12 justify-center">
+                <p>No data available for the selected year.</p>
+            </div>
+        </div>
     {/if}
 </div>

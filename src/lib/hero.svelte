@@ -1,10 +1,11 @@
 <script>
     export let title = 'Welcome to My SvelteKit App';
     export let subtitle = 'This is a hero section created with SvelteKit.';
-    export let backgroundImage = 'static/arise-hero.jpg';
+    //export let backgroundImage = 'static/arise-hero.jpg';
+    import img from '$lib/img/arise-hero.jpg';
 </script>
 
-<div class="hero" style="background-image: url('{backgroundImage}')">
+<div class="hero" style="background-image: url('{img}')">
     <div class="overlay"></div>
     <div class="content">
         <h1>{title}</h1>

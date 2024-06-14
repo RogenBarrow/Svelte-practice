@@ -5,11 +5,7 @@
 
 <html lang="en">
     <body>
-        <Hero
-            title=""
-            subtitle=""
-            backgroundImage="src/lib/img/arise-hero.jpg"
-        />
+        <Hero title="" subtitle="" />
         <div class="">
             <BarComponent />
         </div>

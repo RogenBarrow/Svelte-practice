@@ -116,7 +116,7 @@
         <div class="w-6/12 justify-center">
             <select class="select" on:change={handleYearChange}>
                 <option value="">Select Year</option>
-                {#each [2023, 2024, 2025] as year}
+                {#each [2024, 2025, 2026] as year}
                     <option value={year}>{year}</option>
                 {/each}
             </select>

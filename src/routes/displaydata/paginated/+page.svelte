@@ -2,8 +2,6 @@
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { pdfPrint } from '$lib/components/pdf.js';
-    import metaData from '$lib/components/rowMetaData.js';
-    import { amount } from '$lib/stores/store.js';
 
     // @ts-nocheck
 
@@ -18,14 +16,7 @@
 
     export let data;
 
-    const cleanData = data.supaData;
-    const sourceData = cleanData;
-
-    const paginatedData = data.pagination;
-
-    // console.log('This is the table source: ', sourceData);
-
-    const tableSimple: TableSource = {
+    const setTableSource = (): TableSource => ({
         // A list of heading labels.
         head: [
             'date',
@@ -36,7 +27,7 @@
             'total amount',
         ],
         // The data visibly shown in your table body UI.
-        body: tableMapperValues(paginatedData, [
+        body: tableMapperValues(data.supaData, [
             'date',
             'name',
             //'amount',
@@ -45,25 +36,20 @@
             'total_amount',
         ]),
         // Optional: The data returned when interactive is enabled and a row is clicked.
-        meta: tableMapperValues(paginatedData, ['id']),
-    };
+        meta: tableMapperValues(data.supaData, ['id']),
+    });
+
+    $: tableSimple = data.supaData && setTableSource();
 
     let paginationSettings = {
         page: 0,
         limit: 5,
-        size: sourceData.length,
+        size: data.table.length,
         amounts: [1, 2, 5, 10],
     } satisfies PaginationSettings;
 
     let currentPage = '0';
     let currentAmount = '5';
-
-    // When the component loads, extract the initial values from the URL
-    $: {
-        const queryParams = $page.url.searchParams;
-        currentPage = queryParams.get('page') || '0';
-        currentAmount = queryParams.get('amount') || '5';
-    }
 
     // Function to handle pagination
     const handlePagination = () => {
@@ -105,7 +91,7 @@
                     <Table
                         class="table table-hover max-w-screen-md basis-1/3"
                         source={tableSimple}
-                        interactive={true}
+                        interactive
                         on:selected={(event) =>
                             goto(`/displaydata/${event.detail}`)}
                     />

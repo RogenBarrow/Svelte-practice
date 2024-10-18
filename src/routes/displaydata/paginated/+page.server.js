@@ -1,11 +1,7 @@
 import getSupaData from '$lib/supabaseData.js';
 import getPagination from '$lib/supabasePagination';
 
-export async function load({ url, params, route }) {
-    console.log('The url params:', url);
-    console.log('This is the params: ', params);
-    console.log('This is the route: ', route);
-
+export async function load({ url }) {
     const from = Number(url.searchParams.get('from'));
     const to = Number(url.searchParams.get('to'));
 

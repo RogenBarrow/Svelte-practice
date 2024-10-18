@@ -3,7 +3,6 @@
     import { page } from '$app/stores';
     import { pdfPrint } from '$lib/components/pdf.js';
     import metaData from '$lib/components/rowMetaData.js';
-    import { amount } from '$lib/stores/store.js';
 
     // @ts-nocheck
 

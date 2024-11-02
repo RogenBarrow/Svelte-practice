@@ -3,6 +3,7 @@
     import { page } from '$app/stores';
     import { pdfPrint } from '$lib/components/pdf.js';
     import metaData from '$lib/components/rowMetaData.js';
+    import { amount } from '$lib/stores/store.js';
 
     // @ts-nocheck
 
@@ -13,16 +14,8 @@
     } from '@skeletonlabs/skeleton';
     import { tableMapperValues } from '@skeletonlabs/skeleton';
     import { Paginator } from '@skeletonlabs/skeleton';
-    import { onMount } from 'svelte';
 
     export let data;
-
-    const cleanData = data.supaData;
-    const sourceData = cleanData;
-
-    const paginatedData = data.pagination;
-
-    // console.log('This is the table source: ', sourceData);
 
     const tableSimple: TableSource = {
         // A list of heading labels.
@@ -35,7 +28,7 @@
             'total amount',
         ],
         // The data visibly shown in your table body UI.
-        body: tableMapperValues(paginatedData, [
+        body: tableMapperValues(data.pagination, [
             'date',
             'name',
             //'amount',
@@ -44,13 +37,13 @@
             'total_amount',
         ]),
         // Optional: The data returned when interactive is enabled and a row is clicked.
-        meta: tableMapperValues(paginatedData, ['id']),
+        meta: tableMapperValues(data.pagination, ['id']),
     };
 
     let paginationSettings = {
         page: 0,
         limit: 5,
-        size: sourceData.length,
+        size: data.supaData.length,
         amounts: [1, 2, 5, 10],
     } satisfies PaginationSettings;
 
@@ -77,13 +70,13 @@
     };
 
     // Handle changes in amount
-    const onAmountChange = (event) => {
+    const onAmountChange = (event: any) => {
         currentAmount = event.detail;
         handlePagination();
     };
 
     // Handle changes in page
-    const onPageChange = (event) => {
+    const onPageChange = (event: any) => {
         currentPage = event.detail;
         handlePagination();
     };

@@ -7,7 +7,7 @@ export const load = async () => {
     const data = await getSupaData();
     const table = await getPagination(1, 5);
 
-    //execute store data in file
+    console.log('Get the data for table: ', data);
 
     return {
         supaData: data,

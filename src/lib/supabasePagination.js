@@ -1,7 +1,7 @@
 import supabase from './supabase';
 
 /**
- * * @param {number} [page]
+ * * @param {Number} [page]
  * * @param {number} [number]
  */
 
@@ -9,7 +9,8 @@ async function getPagination(page, number) {
     const { data, error } = await supabase
         .from('attendance')
         .select()
-        .range(page, number);
+        .range(page, number)
+        .order('id', { ascending: true });
 
     if (error) {
         throw error;
@@ -22,7 +23,5 @@ async function getPagination(page, number) {
 
     return data;
 }
-
-// console.log('This is the function: ', getSupaData);
 
 export default getPagination;

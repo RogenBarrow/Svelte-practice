@@ -16,7 +16,10 @@ export default async function getRowiD(id) {
         created_at: new Date(),
     };
 
-    const { data } = await supabase.from('attendance').select().eq('id', id);
+    const { data } = await supabase
+        .from('attendancetest')
+        .select()
+        .eq('id', id);
 
     const result = JSON.stringify(data);
 

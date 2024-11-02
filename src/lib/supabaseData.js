@@ -1,7 +1,10 @@
 import supabase from './supabase';
 
-async function getSupaData() {
-    const { data, error } = await supabase.from('attendance').select();
+async function getSupaDatats() {
+    const { data, error } = await supabase
+        .from('attendance')
+        .select()
+        .order('id', { ascending: true });
 
     if (error) {
         throw error;
@@ -15,6 +18,6 @@ async function getSupaData() {
     return data;
 }
 
-console.log('This is the function: ', getSupaData);
+console.log('This is the function: ', getSupaDatats);
 
-export default getSupaData;
+export default getSupaDatats;

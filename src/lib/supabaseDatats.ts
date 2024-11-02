@@ -3,7 +3,7 @@ import supabase from './supabase';
 
 async function getSupaData() {
     const { data, error } = await supabase
-        .from('attendance')
+        .from('attendancetest')
         .select()
         .returns<FormatDatabaseData[]>();
 

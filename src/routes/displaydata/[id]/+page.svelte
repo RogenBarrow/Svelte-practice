@@ -24,7 +24,7 @@
     <body class="w-screen">
         <div class="flex justify-center mt-10">
             <main class="">
-                <form on:submit={handleSubmit}>
+                <form method="post">
                     <h1 class="text-center">Arise Attendance Submission</h1>
                     <!-- Grid -->
                     <div>
@@ -45,7 +45,6 @@
                         <label class="label">
                             <span>Attandence in Church</span>
                             <input
-                                disabled
                                 class="input bg-white"
                                 title="Input (number)"
                                 type="number"
@@ -58,7 +57,6 @@
                         <label class="label">
                             <span> Arise kids</span>
                             <input
-                                disabled
                                 class="input bg-white"
                                 title="Input (number)"
                                 type="number"
@@ -71,7 +69,6 @@
                         <label class="label">
                             <span> Arise kids leaders</span>
                             <input
-                                disabled
                                 class="input bg-white"
                                 title="Input (number)"
                                 type="number"
@@ -99,7 +96,13 @@
                         <button
                             class="btn variant-filled bg-primary-500 mt-5"
                             type="submit"
-                            id="submitform">Delete Record</button
+                            id="submitform">Edit Record</button
+                        >
+                        <button
+                            class="btn variant-filled bg-primary-500 mt-5"
+                            type="submit"
+                            id="submitform"
+                            on:submit={handleSubmit}>Delete Record</button
                         >
                     </div>
                 </form>

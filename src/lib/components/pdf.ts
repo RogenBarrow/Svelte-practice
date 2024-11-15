@@ -1,29 +1,39 @@
-import { error } from '@sveltejs/kit';
-import { jsPDF } from 'jspdf';
+import fetchDataForSum from './server/database/getDataforSum';
 
-export function pdfPrint() {
-    try {
-        const doc = new jsPDF('l', 'pt', 'a4');
+export async function pdfPrint() {
+    // requires
+    const fs = require('fs');
+    const PDFDocument = require('pdfkit-table');
+    const data = await fetchDataForSum();
 
-        const source = document.getElementById('pdf')!;
-        if (!source) {
-            throw new Error('PDF source element not found');
-        }
+    // init document
+    let doc = new PDFDocument({ margin: 30, size: 'A4' });
+    // save document
+    doc.pipe(fs.createWriteStream('./document.pdf'));
 
-        console.log(source);
-        doc.html(source, {
-            callback: function () {
-                // Access the 'doc' object from the outer scope directly
-                doc.save('test.pdf');
-            },
-            x: 5,
-            y: 5,
-            windowWidth: 50,
+    (async function createTable() {
+        // table
+        const table = {
+            title: '',
+            headers: [],
+            datas: [data],
+            rows: [
+                /* or simple data */
+            ],
+        };
+
+        // the magic (async/await)
+        await doc.table(table, {
+            /* options */
         });
+        // -- or --
+        // doc.table(table).then(() => { doc.end() }).catch((err) => { })
 
-        return pdfPrint;
-    } catch {
-        error;
-        console.log(error);
-    }
+        // if your run express.js server
+        // to show PDF on navigator
+        // doc.pipe(res);
+
+        // done!
+        doc.end();
+    })();
 }

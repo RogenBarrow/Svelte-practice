@@ -71,6 +71,11 @@
                                 >Submit Attendance</a
                             >
                             <a
+                                href="/info"
+                                class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
+                                >Additional information</a
+                            >
+                            <a
                                 href="/displaydata"
                                 class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
                                 >Report</a

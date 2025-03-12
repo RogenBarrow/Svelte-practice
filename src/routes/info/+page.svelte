@@ -42,6 +42,16 @@
                                 required
                             />
                         </label>
+                        <label class="label">
+                            <span> Desrciption</span>
+                            <textarea
+                                class="textarea bg-white"
+                                rows="4"
+                                title="Input (number)"
+                                name="description"
+                                required
+                            />
+                        </label>
 
                         <!-- Button -->
                         <button

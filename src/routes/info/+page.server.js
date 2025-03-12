@@ -13,6 +13,7 @@ export const actions = {
         const date = obj.date;
         const preacher = obj.preacher;
         const title = obj.title;
+        const description = obj.description;
 
         // const actDate = obj.date;
         // const actNumber = obj.number;
@@ -27,6 +28,7 @@ export const actions = {
             date: date,
             preacher: preacher,
             title: title,
+            description: description,
         });
 
         if (error) {

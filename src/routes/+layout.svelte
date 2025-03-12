@@ -80,6 +80,11 @@
                                 class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
                                 >Report</a
                             >
+                            <a
+                                href="/displayinfo"
+                                class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
+                                >Church´s Themes</a
+                            >
                         </div>
                     </div>
                     <div class=" flex flex-right items-right"></div>

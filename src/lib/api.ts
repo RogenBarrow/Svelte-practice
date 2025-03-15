@@ -2,7 +2,7 @@ import type { State } from '@vincjo/datatables/remote';
 
 export const reload = async (state: State) => {
     const response = await fetch(
-        `https://jsonplaceholder.typicode.com/todos?${getParams(state)}`
+        `/api/getDataPagination'?${getParams(state)}`
     );
     return response.json();
 };

@@ -3,7 +3,7 @@ import { dbProdcution } from './utils/dbTables';
 
 async function getSupaSum() {
     const { data, error } = await supabase
-        .from(dbProdcution)
+        .from('attendance')
         .select('id, date, total_amount');
 
     if (error) {

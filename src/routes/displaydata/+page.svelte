@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Datatable from '$lib/components/Datatable.svelte';
     import { goto } from '$app/navigation';
     import { page } from '$app/stores';
     import { pdfPrint } from '$lib/components/pdf.js';
@@ -88,6 +89,9 @@
                 on:click={pdfPrint}>Download PDF</button
             >
             <div />
+            <div class=" table-auto content-center w-2/3 space-y-2">
+                <div><Datatable /></div>
+            </div>
             <div class="flex flex-row">
                 <div class="basis-1/3"></div>
                 <div id="pdf">

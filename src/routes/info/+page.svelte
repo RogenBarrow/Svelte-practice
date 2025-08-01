@@ -43,7 +43,7 @@
                             />
                         </label>
                         <label class="label">
-                            <span> Desrciption</span>
+                            <span> Description</span>
                             <textarea
                                 class="textarea bg-white"
                                 rows="4"

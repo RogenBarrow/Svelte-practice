@@ -1,16 +1,22 @@
-//import { pdfPrint } from '$lib/components/pdf';
 import getSupaData from '$lib/supabaseData';
-import getPagination from '$lib/supabasePagination';
-//import { data } from 'autoprefixer';
 
 export const load = async () => {
-    const data = await getSupaData();
-    const table = await getPagination(1, 5);
+    try {
+        console.log('Starting to load data...');
+        const data = await getSupaData();
+        console.log('Loaded data for table: ', data);
+        console.log('Data type:', typeof data);
+        console.log('Data length:', data?.length);
 
-    console.log('Get the data for table: ', data);
-
-    return {
-        supaData: data,
-        pagination: table,
-    };
+        return {
+            supaData: data || [],
+        };
+    } catch (error) {
+        console.error('Error loading data:', error);
+        console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
+        return {
+            supaData: [],
+            error: error instanceof Error ? error.message : 'Unknown error'
+        };
+    }
 };

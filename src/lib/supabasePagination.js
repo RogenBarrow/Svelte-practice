@@ -7,7 +7,7 @@ import supabase from './supabase';
 
 async function getPagination(page, number) {
     const { data, error } = await supabase
-        .from('attendance')
+        .from('attendancetest')
         .select()
         .range(page, number)
         .order('id', { ascending: true });

@@ -8,7 +8,8 @@
         "build": "vite build",
         "preview": "vite preview",
         "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+        "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+        "test": "vitest run"
     },
     "devDependencies": {
         "@skeletonlabs/skeleton": "^2.7.1",
@@ -32,6 +33,7 @@
         "dotenv": "^16.3.1",
         "jspdf": "^2.5.1",
         "postgres": "^3.3.5",
-        "sk-form-data": "^1.0.1"
+        "sk-form-data": "^1.0.1",
+        "vitest": "^1.5.0"
     }
 }

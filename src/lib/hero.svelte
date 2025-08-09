@@ -5,11 +5,14 @@
     import img from '$lib/img/arise-hero.jpg';
 </script>
 
-<div class="hero" style="background-image: url('{img}')">
+<div
+    class="hero min-h-[40vh] sm:min-h[50vh]"
+    style="background-image: url('{img}')"
+>
     <div class="overlay"></div>
     <div class="content">
-        <h1>{title}</h1>
-        <p>{subtitle}</p>
+        <h1 class="text-4xl sm:text-6xl">{title}</h1>
+        <p class="text-base sm:text-2xl">{subtitle}</p>
     </div>
 </div>
 
@@ -18,7 +21,6 @@
         position: relative;
         background-size: cover;
         background-position: center;
-        height: 50vh;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -47,7 +49,6 @@
     }
 
     p {
-        font-size: 1.5rem;
         margin: 0;
     }
 </style>

@@ -113,7 +113,7 @@
 
 <div class="flex flex-col">
     <div class="flex flex-col items-center m-2">
-        <div class="w-6/12 justify-center">
+        <div class="w-full sm:w-6/12 justify-center">
             <select class="select" on:change={handleYearChange}>
                 <option value="">Select Year</option>
                 {#each [2024, 2025, 2026] as year}
@@ -127,7 +127,7 @@
         <div class="flex flex-col">
             {#each Object.entries(monthlyData) as [month, value]}
                 <div class="flex flex-col items-center m-2">
-                    <div class="w-6/12 justify-center">
+                    <div class="w-full sm:w-6/12 justify-center">
                         <p>{month}</p>
                         <p class="content-right">{value}</p>
                         <ProgressBar {value} max={1200} />
@@ -137,7 +137,7 @@
         </div>
     {:else}
         <div class="flex flex-col items-center m-2">
-            <div class="w-6/12 justify-center">
+            <div class="w-full sm:w-6/12justify-center">
                 <p>No data available for the selected year.</p>
             </div>
         </div>

@@ -2,7 +2,16 @@
     import { AppShell } from '@skeletonlabs/skeleton';
     import '../app.pcss';
     import img from '$lib/img/Arise.png';
-    import { LightSwitch } from '@skeletonlabs/skeleton';
+    import { redirect } from '@sveltejs/kit';
+
+    export const load = async ({ locals, url }) => {
+        if (!locals.session)
+            throw redirect(
+                303,
+                `/login?redirect=${encodeURIComponent(url.pathname)}`
+            );
+        return { user: locals.user };
+    };
 </script>
 
 <AppShell>

@@ -2,7 +2,12 @@
     "name": "svelte-practice",
     "version": "0.0.1",
     "private": true,
-    "type": "module",
+    {
+        "type": "module",
+        "engines": {
+            "node": ">=20"
+        }
+    },
     "scripts": {
         "dev": "vite dev",
         "build": "vite build",

@@ -1,5 +1,9 @@
 import { redirect, fail } from "@sveltejs/kit";
 
+export const load = async ({ locals, url }) => {
+    if (locals.session) throw redirect(303, url.searchParams.get('redirect') ?? '/dashboard');
+};
+
 export const actions = {
     default: async ({ request, locals }) => {
         const form = await request.formData();

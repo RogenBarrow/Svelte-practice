@@ -30,8 +30,9 @@ A SvelteKit application for tracking church attendance data with analytics and r
 Create a `.env` file in the root directory:
 
 ```env
-SUPABASE_URL=your_supabase_project_url
-SUPABASE_KEY=your_supabase_anon_key
+PUBLIC_SUPABASE_URL=
+PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE=
 ```
 
 ## Installation

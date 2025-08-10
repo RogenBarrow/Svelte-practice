@@ -3,7 +3,11 @@ import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 import { PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY } from "$env/static/public";
 import { SUPABASE_SERVICE_ROLE } from "$env/static/private";
 import { dev } from "$app/environment";
-import type { RequestEvent } from '@sveltejs/kit'
+import type { RequestEvent } from '@sveltejs/kit';
+
+if (!PUBLIC_SUPABASE_URL || !PUBLIC_SUPABASE_ANON_KEY) {
+    throw new Error('Missing PUBLIC_SUPABASE_URL or PUBLIC_SUPABASE_ANON_KEY');
+}
 
 export function supabaseServer(event: RequestEvent) {
     const { cookies, fetch } = event;

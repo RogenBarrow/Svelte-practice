@@ -5,7 +5,8 @@ import getPagination from '$lib/supabasePagination';
 
 export const load = async () => {
     const data = await getSupaData();
-    const table = await getPagination(1, 5);
+    // Fetch the first 5 rows (indices 0..4 inclusive)
+    const table = await getPagination(0, 4);
 
     console.log('Get the data for table: ', data);
 

@@ -9,7 +9,7 @@ function sumOfAll(actNumber, actNumberKids, actNumberKidsleaders) {
         parseInt(actNumberKids) +
         parseInt(actNumberKidsleaders);
 
-    const amountString = JSON.stringify(totalAttendance);
+    const amountString = totalAttendance;
 
     return amountString;
 }

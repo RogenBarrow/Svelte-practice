@@ -58,7 +58,7 @@
     const handlePagination = () => {
         const fromRecord =
             parseInt(currentPage, 10) * parseInt(currentAmount, 10);
-        const toRecord = fromRecord + parseInt(currentAmount, 10);
+        const toRecord = fromRecord + parseInt(currentAmount, 10) - 1;
 
         console.log('From Record:', fromRecord, 'To Record:', toRecord);
 
@@ -79,35 +79,30 @@
     };
 </script>
 
-<html lang="en">
-    <body>
-        <div class="">
-            <button
-                type="button"
-                class="btn variant-filled bg-primary-500 ml-12 mb-2"
-                on:click={pdfPrint}>Download PDF</button
-            >
-            <div />
-            <div class="flex flex-row">
-                <div class="basis-1/3"></div>
-                <div id="pdf">
-                    <Table
-                        class="table table-hover max-w-screen-md basis-1/3"
-                        source={tableSimple}
-                        interactive={true}
-                        on:selected={(event) =>
-                            goto(`/displaydata/${event.detail}`)}
-                    />
-                    <Paginator
-                        bind:settings={paginationSettings}
-                        showFirstLastButtons={false}
-                        showPreviousNextButtons={true}
-                        on:page={onPageChange}
-                        on:amount={onAmountChange}
-                    ></Paginator>
-                </div>
-                <div class="basis-1/3"></div>
-            </div>
-        </div></body
+<div class="">
+    <button
+        type="button"
+        class="btn variant-filled bg-primary-500 ml-12 mb-2"
+        on:click={pdfPrint}>Download PDF</button
     >
-</html>
+    <div />
+    <div class="flex flex-row">
+        <div class="basis-1/3"></div>
+        <div id="pdf">
+            <Table
+                class="table table-hover max-w-screen-md basis-1/3"
+                source={tableSimple}
+                interactive={true}
+                on:selected={(event) => goto(`/displaydata/${event.detail}`)}
+            />
+            <Paginator
+                bind:settings={paginationSettings}
+                showFirstLastButtons={false}
+                showPreviousNextButtons={true}
+                on:page={onPageChange}
+                on:amount={onAmountChange}
+            ></Paginator>
+        </div>
+        <div class="basis-1/3"></div>
+    </div>
+</div>

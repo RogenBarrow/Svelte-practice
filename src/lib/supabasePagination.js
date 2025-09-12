@@ -1,29 +1,25 @@
 import supabase from './supabase';
 
 /**
- * Fetch a range of rows (inclusive indices).
- * @param {number} from - zero-based start index
- * @param {number} to - zero-based end index (inclusive)
+ * * @param {Number} [from]
+ * * @param {number} [to]
  */
-async function getPagination(from, to) {
-    if (
-        !Number.isInteger(from) ||
-        !Number.isInteger(to) ||
-        from < 0 ||
-        to < from
-    ) {
-        throw new Error(`Invalid range: from=${from}, to=${to}`);
-    }
 
+async function getPagination(from, to) {
     const { data, error } = await supabase
         .from('attendance')
-        .select('*')
-        .order('id', { ascending: true })
-        .range(from, to);
+        .select()
+        .range(from, to)
+        .order('id', { ascending: true });
 
     if (error) {
         throw error;
     }
+
+    //const getSupaData = data;
+
+    // console.log('This is the data: ', data);
+    // console.error('This is the error: ', error);
 
     return data;
 }

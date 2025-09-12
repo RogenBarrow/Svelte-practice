@@ -42,35 +42,34 @@
     $: tableSimple = data.supaData && setTableSource();
 
     let paginationSettings = {
-        page: 0,
-        limit: 5,
+        page: data.pageTable - 1, // Convert 1-based to 0-based for Skeleton UI
+        limit: data.amountTable,
         size: data.table.length,
         amounts: [1, 2, 5, 10],
     } satisfies PaginationSettings;
 
-    let currentPage = '0';
-    let currentAmount = '5';
+    let currentPage = String(data.pageTable - 1); // Convert 1-based to 0-based
+    let currentAmount = String(data.amountTable);
 
     // Function to handle pagination
     const handlePagination = () => {
-        const fromRecord =
-            parseInt(currentPage, 10) * parseInt(currentAmount, 10) - 1;
-        const toRecord = fromRecord + parseInt(currentAmount, 10);
+        const page = parseInt(currentPage, 10) + 1; // Convert 0-based to 1-based
+        const limit = parseInt(currentAmount, 10);
 
-        console.log('From Record:', fromRecord, 'To Record:', toRecord);
+        console.log('Page:', page, 'Limit:', limit);
 
-        // Update the URL with the new page and amount (fromRecord and toRecord)
-        goto(`/displaydata/paginated?from=${fromRecord}&to=${toRecord}`);
+        // Update the URL with the new page and limit
+        goto(`/displaydata/paginated?page=${page}&limit=${limit}`);
     };
 
     // Handle changes in amount
-    const onAmountChange = (event) => {
+    const onAmountChange = (event: CustomEvent) => {
         currentAmount = event.detail;
         handlePagination();
     };
 
     // Handle changes in page
-    const onPageChange = (event) => {
+    const onPageChange = (event: CustomEvent) => {
         currentPage = event.detail;
         handlePagination();
     };

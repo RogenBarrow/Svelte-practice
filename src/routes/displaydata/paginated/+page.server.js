@@ -2,38 +2,25 @@ import getSupaData from '$lib/supabaseData.js';
 import getPagination from '$lib/supabasePagination';
 
 export async function load({ url }) {
-    const from = Number(url.searchParams.get('from'));
-    const to = Number(url.searchParams.get('to'));
+    // Get parameters from URL
+    const page = Number(url.searchParams.get('page') ?? '1');
+    const limit = Number(url.searchParams.get('limit') ?? '5');
 
-    // Extract the actual query string from the `page` key
-    const queryString = url.searchParams;
+    // Calculate pagination range
+    const from = (page - 1) * limit;
+    const to = from + limit - 1;
 
-    // Use URLSearchParams to parse the extracted query string
-    const searchParams = new URLSearchParams(queryString);
+    console.log('Page:', page);
+    console.log('Limit:', limit);
+    console.log('From:', from, 'To:', to);
 
-    // Extract the values
-    const pageStr = searchParams.get('from'); // Should be '1'
-    const amountStr = searchParams.get('to'); // Should be '5'
-
-    // Convert to numbers
-    const page = Number(pageStr);
-    const amount = Number(amountStr);
-
-    //The log of url data
-    console.log('Page:', page); // 1
-    console.log('Amount:', amount); // 5
-
-    // const page = Number(params.page);
-    // console.log('The url params:', page);
-
-    const data = await getPagination(page, amount);
-
+    const data = await getPagination(from, to);
     const tableData = await getSupaData();
 
     return {
         supaData: data,
         table: tableData,
         pageTable: page,
-        amountTable: amount,
+        amountTable: limit,
     };
 }

@@ -41,37 +41,58 @@
 
     $: tableSimple = data.supaData && setTableSource();
 
+    // Create pagination settings that can be bound to the component
     let paginationSettings = {
-        page: data.pageTable - 1, // Convert 1-based to 0-based for Skeleton UI
-        limit: data.amountTable,
-        size: data.table.length,
+        page: 0,
+        limit: 5,
+        size: 0,
         amounts: [1, 2, 5, 10],
     } satisfies PaginationSettings;
 
-    let currentPage = String(data.pageTable - 1); // Convert 1-based to 0-based
-    let currentAmount = String(data.amountTable);
+    // Update settings when data changes
+    $: if (data) {
+        paginationSettings = {
+            page: data.pageTable - 1, // Convert 1-based to 0-based for Skeleton UI
+            limit: data.amountTable,
+            size: data.table.length,
+            amounts: [1, 2, 5, 10],
+        };
+    }
 
     // Function to handle pagination
-    const handlePagination = () => {
-        const page = parseInt(currentPage, 10) + 1; // Convert 0-based to 1-based
-        const limit = parseInt(currentAmount, 10);
-
+    const handlePagination = (page: number, limit: number) => {
         console.log('Page:', page, 'Limit:', limit);
-
-        // Update the URL with the new page and limit
         goto(`/displaydata/paginated?page=${page}&limit=${limit}`);
     };
 
-    // Handle changes in amount
+    // Handle changes in amount - use the event detail directly
     const onAmountChange = (event: CustomEvent) => {
-        currentAmount = event.detail;
-        handlePagination();
+        const newLimit = parseInt(event.detail, 10);
+        const currentPage = paginationSettings.page + 1; // Convert 0-based to 1-based
+        console.log(
+            'Amount change - Event detail:',
+            event.detail,
+            'New limit:',
+            newLimit,
+            'Current page:',
+            currentPage
+        );
+        handlePagination(currentPage, newLimit);
     };
 
-    // Handle changes in page
+    // Handle changes in page - use the event detail directly
     const onPageChange = (event: CustomEvent) => {
-        currentPage = event.detail;
-        handlePagination();
+        const newPage = parseInt(event.detail, 10) + 1; // Convert 0-based to 1-based
+        const currentLimit = paginationSettings.limit;
+        console.log(
+            'Page change - Event detail:',
+            event.detail,
+            'New page:',
+            newPage,
+            'Current limit:',
+            currentLimit
+        );
+        handlePagination(newPage, currentLimit);
     };
 </script>
 
@@ -92,7 +113,7 @@
                 on:selected={(event) => goto(`/displaydata/${event.detail}`)}
             />
             <Paginator
-                bind:settings={paginationSettings}
+                settings={paginationSettings}
                 showFirstLastButtons={false}
                 showPreviousNextButtons={true}
                 on:page={onPageChange}

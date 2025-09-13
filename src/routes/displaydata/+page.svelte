@@ -1,108 +1,99 @@
 <script lang="ts">
-    import { goto } from '$app/navigation';
-    import { page } from '$app/stores';
-    import { pdfPrint } from '$lib/components/pdf.js';
-    // @ts-nocheck
-
-    import { Table } from '@skeletonlabs/skeleton';
-    import type {
-        PaginationSettings,
-        TableSource,
-    } from '@skeletonlabs/skeleton';
-    import { tableMapperValues } from '@skeletonlabs/skeleton';
-    import { Paginator } from '@skeletonlabs/skeleton';
-
+    import Grid from 'gridjs-svelte';
+    import { html } from 'gridjs';
+    import 'gridjs/dist/theme/mermaid.css';
     export let data;
+    const columns = [
+        {
+            id: 'id',
+            name: html('<span class="hidden sm:inline">ID</span>'),
+            width: '64px',
+            attributes: () => ({ class: 'hidden sm:table-cell' }),
+        },
+        {
+            id: 'date',
+            name: 'Date',
+            sort: true,
 
-    const tableSimple: TableSource = {
-        // A list of heading labels.
-        head: [
-            'date',
-            'name',
-            //'amount attendance',
-            //'amount kids',
-            //'amount kids leaders',
-            'total amount',
-        ],
-        // The data visibly shown in your table body UI.
-        body: tableMapperValues(data.pagination, [
-            'date',
-            'name',
-            //'amount',
-            //'amount_kids',
-            //'amount_kids_leader',
-            'total_amount',
-        ]),
-        // Optional: The data returned when interactive is enabled and a row is clicked.
-        meta: tableMapperValues(data.pagination, ['id']),
-    };
+            formatter: (cell: string) => new Date(cell).toLocaleDateString(),
+        },
+        {
+            id: 'name',
+            name: html('<span class="hidden sm:inline">Submitter</span>'),
+            attributes: () => ({ class: 'hidden sm:table-cell' }),
+            sort: true,
+        },
+        {
+            id: 'amount',
+            name: html('<span class="hidden sm:inline">Adults</span>'),
+            sort: true,
+            attributes: () => ({ class: 'hidden sm:table-cell' }),
+            formatter: (cell: number) => cell?.toLocaleString?.() ?? cell,
+        },
+        {
+            id: 'amount_kids',
+            name: html('<span class="hidden sm:inline">Kids</span>'),
+            sort: true,
+            attributes: () => ({ class: 'hidden sm:table-cell' }),
+            formatter: (cell: number) => cell?.toLocaleString?.() ?? cell,
+        },
+        {
+            id: 'amount_kids_leader',
+            name: html('<span class="hidden sm:inline">Leaders</span>'),
+            sort: true,
+            attributes: () => ({ class: 'hidden sm:table-cell' }),
+            formatter: (cell: number) => cell?.toLocaleString?.() ?? cell,
+        },
+        {
+            id: 'total_amount',
+            name: 'Total',
+            sort: true,
+            formatter: (cell: number) =>
+                html(`<strong>${Number(cell).toLocaleString()}</strong>`),
+            attributes: (cell: number) => ({
+                class: cell >= 200 ? 'text-red-600 font-semibold' : '',
+            }),
+        },
+        {
+            name: 'Actions',
+            sort: false,
 
-    let paginationSettings = {
-        page: 0,
-        limit: 5,
-        size: data.supaData.length,
-        amounts: [1, 2, 5, 10],
-    } satisfies PaginationSettings;
-
-    let currentPage = '0';
-    let currentAmount = '5';
-
-    // When the component loads, extract the initial values from the URL
-    $: {
-        const queryParams = $page.url.searchParams;
-        currentPage = queryParams.get('page') || '0';
-        currentAmount = queryParams.get('amount') || '5';
-    }
-
-    // Function to handle pagination
-    const handlePagination = () => {
-        const fromRecord =
-            parseInt(currentPage, 10) * parseInt(currentAmount, 10);
-        const toRecord = fromRecord + parseInt(currentAmount, 10) - 1;
-
-        console.log('From Record:', fromRecord, 'To Record:', toRecord);
-
-        // Update the URL with the new page and amount (fromRecord and toRecord)
-        goto(`/displaydata/paginated?from=${fromRecord}&to=${toRecord}`);
-    };
-
-    // Handle changes in amount
-    const onAmountChange = (event: any) => {
-        currentAmount = event.detail;
-        handlePagination();
-    };
-
-    // Handle changes in page
-    const onPageChange = (event: any) => {
-        currentPage = event.detail;
-        handlePagination();
+            formatter: (_: unknown, row: any) => {
+                const id = row.cells[0].data;
+                return html(
+                    `<a class="px-2 py-1 rounded bg-indigo-600 text-white" href="/displaydata/${id}">View</a>`
+                );
+            },
+        },
+    ];
+    const className = {
+        table: 'table-auto w-full',
+        th: 'px-3 py-2 text-left bg-slate-100',
+        td: 'px-3 py-2',
+        tr: 'hover:bg-slate-50',
     };
 </script>
 
-<div class="">
-    <button
-        type="button"
-        class="btn variant-filled bg-primary-500 ml-12 mb-2"
-        on:click={pdfPrint}>Download PDF</button
-    >
-    <div />
-    <div class="flex flex-row">
-        <div class="basis-1/3"></div>
-        <div id="pdf">
-            <Table
-                class="table table-hover max-w-screen-md basis-1/3"
-                source={tableSimple}
-                interactive={true}
-                on:selected={(event) => goto(`/displaydata/${event.detail}`)}
-            />
-            <Paginator
-                bind:settings={paginationSettings}
-                showFirstLastButtons={false}
-                showPreviousNextButtons={true}
-                on:page={onPageChange}
-                on:amount={onAmountChange}
-            ></Paginator>
-        </div>
-        <div class="basis-1/3"></div>
-    </div>
+<div class="max-w-5xl mx-auto">
+    <Grid
+        data={data.supaData}
+        {columns}
+        search={{ enabled: true }}
+        sort={true}
+        pagination={{ enabled: true, limit: 10, summary: true }}
+        fixedHeader={true}
+        height="420px"
+        {className}
+        language={{
+            search: { placeholder: 'Type to search...' },
+            pagination: {
+                previous: 'Prev',
+                next: 'Next',
+                showing: 'Showing',
+                of: 'of',
+                to: 'to',
+                results: 'results',
+            },
+        }}
+    />
 </div>

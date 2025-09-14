@@ -1,9 +1,9 @@
 import supabase from './supabase';
-import { dbProdcution } from './utils/dbTables';
+import { ATTENDANCE_TABLE, dbProdcution } from './utils/dbTables';
 
 async function getSupaSum() {
     const { data, error } = await supabase
-        .from(dbProdcution)
+        .from(ATTENDANCE_TABLE)
         .select('id, date, total_amount');
 
     if (error) {

@@ -2,6 +2,7 @@ import { error, redirect } from '@sveltejs/kit';
 import getRowiD from '../../../lib/components/server/database/getRowId';
 import supabase from '$lib/supabase';
 import sumOfAll from '$lib/sum';
+import { ATTENDANCE_TABLE } from '$lib/utils/dbTables';
 
 export async function load({ url, params }) {
     const id = params.id;
@@ -31,7 +32,7 @@ export const actions = {
         console.log('The object data: ', obj, insertData);
 
         const { error } = await supabase
-            .from('attendancetest')
+            .from(ATTENDANCE_TABLE)
             .update({
                 date: actDate,
                 amount: actNumber,

@@ -1,9 +1,10 @@
 import type { FormatDatabaseData } from '../types';
 import supabase from './supabase';
+import { ATTENDANCE_TABLE } from './utils/dbTables';
 
 async function getSupaDataPdf() {
     const { data, error } = await supabase
-        .from('attendance')
+        .from(ATTENDANCE_TABLE)
         .select('date,amount,amount_kids,amount_kids_leader,total_amount,name')
         .returns<FormatDatabaseData[]>();
 

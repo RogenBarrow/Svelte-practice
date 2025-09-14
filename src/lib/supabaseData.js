@@ -1,8 +1,9 @@
 import supabase from './supabase';
+import { ATTENDANCE_TABLE } from './utils/dbTables';
 
 async function getSupaDatats() {
     const { data, error } = await supabase
-        .from('attendance')
+        .from(ATTENDANCE_TABLE)
         .select()
         .order('id', { ascending: true });
 

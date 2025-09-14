@@ -6,42 +6,36 @@
     const columns = [
         {
             id: 'id',
-            name: html('<span class="hidden sm:inline">ID</span>'),
+            name: 'ID',
             width: '64px',
-            attributes: () => ({ class: 'hidden sm:table-cell' }),
         },
         {
             id: 'date',
             name: 'Date',
             sort: true,
-
             formatter: (cell: string) => new Date(cell).toLocaleDateString(),
         },
         {
             id: 'name',
-            name: html('<span class="hidden sm:inline">Submitter</span>'),
-            attributes: () => ({ class: 'hidden sm:table-cell' }),
+            name: 'Name',
             sort: true,
         },
         {
             id: 'amount',
-            name: html('<span class="hidden sm:inline">Adults</span>'),
+            name: 'Adults',
             sort: true,
-            attributes: () => ({ class: 'hidden sm:table-cell' }),
             formatter: (cell: number) => cell?.toLocaleString?.() ?? cell,
         },
         {
             id: 'amount_kids',
-            name: html('<span class="hidden sm:inline">Kids</span>'),
+            name: 'Kids',
             sort: true,
-            attributes: () => ({ class: 'hidden sm:table-cell' }),
             formatter: (cell: number) => cell?.toLocaleString?.() ?? cell,
         },
         {
             id: 'amount_kids_leader',
-            name: html('<span class="hidden sm:inline">Leaders</span>'),
+            name: 'Leaders',
             sort: true,
-            attributes: () => ({ class: 'hidden sm:table-cell' }),
             formatter: (cell: number) => cell?.toLocaleString?.() ?? cell,
         },
         {
@@ -50,9 +44,6 @@
             sort: true,
             formatter: (cell: number) =>
                 html(`<strong>${Number(cell).toLocaleString()}</strong>`),
-            attributes: (cell: number) => ({
-                class: cell >= 200 ? 'text-red-600 font-semibold' : '',
-            }),
         },
         {
             name: 'Actions',
@@ -68,13 +59,13 @@
     ];
     const className = {
         table: 'table-auto w-full',
-        th: 'px-3 py-2 text-left bg-slate-100',
-        td: 'px-3 py-2',
+        th: 'px-3 py-2 text-left bg-slate-100 text-xs font-semibold uppercase',
+        td: 'px-3 py-2 truncate',
         tr: 'hover:bg-slate-50',
     };
 </script>
 
-<div class="max-w-5xl mx-auto">
+<div class="attendance-grid max-w-5xl mx-auto">
     <Grid
         data={data.supaData}
         {columns}
@@ -97,3 +88,20 @@
         }}
     />
 </div>
+
+<style>
+    @media (max-width: 640px) {
+        .attendance-grid :global(th:nth-child(1)),
+        .attendance-grid :global(th:nth-child(3)),
+        .attendance-grid :global(th:nth-child(4)),
+        .attendance-grid :global(th:nth-child(5)),
+        .attendance-grid :global(th:nth-child(6)),
+        .attendance-grid :global(td:nth-child(1)),
+        .attendance-grid :global(td:nth-child(3)),
+        .attendance-grid :global(td:nth-child(4)),
+        .attendance-grid :global(td:nth-child(5)),
+        .attendance-grid :global(td:nth-child(6)) {
+            display: none !important;
+        }
+    }
+</style>

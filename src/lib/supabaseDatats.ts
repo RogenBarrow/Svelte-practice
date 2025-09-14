@@ -1,9 +1,10 @@
 import type { FormatDatabaseData } from '../types';
 import supabase from './supabase';
+import { ATTENDANCE_TABLE } from './utils/dbTables';
 
 async function getSupaData() {
     const { data, error } = await supabase
-        .from('attendance')
+        .from(ATTENDANCE_TABLE)
         .select()
         .returns<FormatDatabaseData[]>();
 

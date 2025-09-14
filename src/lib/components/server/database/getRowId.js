@@ -1,4 +1,5 @@
 import { goto } from '$app/navigation';
+import { ATTENDANCE_TABLE } from '$lib/utils/dbTables';
 import supabase from '../../../supabase';
 
 /**
@@ -16,7 +17,7 @@ export default async function getRowiD(id) {
         created_at: new Date(),
     };
 
-    const { data } = await supabase.from('attendance').select().eq('id', id);
+    const { data } = await supabase.from(ATTENDANCE_TABLE).select().eq('id', id);
 
     const result = JSON.stringify(data);
 

@@ -1,4 +1,5 @@
 import supabase from './supabase';
+import { ATTENDANCE_TABLE } from './utils/dbTables';
 
 /**
  * * @param {Number} [from]
@@ -7,7 +8,7 @@ import supabase from './supabase';
 
 async function getPagination(from, to) {
     const { data, error } = await supabase
-        .from('attendance')
+        .from(ATTENDANCE_TABLE)
         .select()
         .range(from, to)
         .order('id', { ascending: true });

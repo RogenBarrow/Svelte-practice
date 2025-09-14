@@ -1,5 +1,6 @@
 import sumOfAll from '$lib/sum.js';
 import supabase from '$lib/supabase';
+import { ATTENDANCE_TABLE } from '$lib/utils/dbTables';
 
 const todayDate = new Date();
 
@@ -28,7 +29,7 @@ export const actions = {
 
         console.log('this is the amount: ', amount);
 
-        const { error } = await supabase.from('attendance').insert({
+        const { error } = await supabase.from(ATTENDANCE_TABLE).insert({
             date: actDate,
             amount: actNumber,
             amount_kids: actNumberKids,

@@ -32,12 +32,13 @@ FROM node:${NODE_VERSION}-alpine AS final
 WORKDIR /usr/src/app
 ENV NODE_ENV=production
 
-# Create non-root user
-RUN addgroup -g 1001 -S node && adduser -u 1001 -S node -G node
-
 # Copy runtime deps and built app
 COPY --from=deps /usr/src/app/node_modules ./node_modules
 COPY --from=build /usr/src/app/. ./
+
+# Ensure app directory is owned by the pre-existing 'node' user
+RUN chown -R node:node /usr/src/app
+USER node
 
 # Network and port
 ENV HOST=0.0.0.0

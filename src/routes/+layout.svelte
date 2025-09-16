@@ -3,6 +3,7 @@
     import '../app.pcss';
     import img from '$lib/img/Arise.png';
     import { LightSwitch } from '@skeletonlabs/skeleton';
+    import BottomBar from '$lib/components/bottomBar.svelte';
 </script>
 
 <AppShell>
@@ -141,4 +142,5 @@
     </nav>
 
     <slot />
+    <BottomBar />
 </AppShell>

@@ -14,7 +14,7 @@ RUN corepack enable && corepack prepare pnpm@9.15.9 --activate
 FROM base AS deps
 COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,target=/root/.pnpm-store \
-  pnpm install --frozen-lockfile --prod
+  pnpm install --no-frozen-lockfile --prod
 
 ################################################################################
 # Build the application
@@ -22,7 +22,7 @@ FROM base AS build
 ENV NODE_ENV=development
 COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,target=/root/.pnpm-store \
-  pnpm install --frozen-lockfile
+  pnpm install --no-frozen-lockfile
 COPY . .
 RUN pnpm postinstall && pnpm build
 

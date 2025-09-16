@@ -5,7 +5,6 @@ ARG NODE_VERSION=20.9.0
 # Base image
 FROM node:${NODE_VERSION}-alpine AS base
 WORKDIR /usr/src/app
-ENV NODE_ENV=production
 
 # Use pnpm (matches repo's packageManager)
 RUN corepack enable && corepack prepare pnpm@9.15.9 --activate
@@ -20,6 +19,7 @@ RUN --mount=type=cache,target=/root/.pnpm-store \
 ################################################################################
 # Build the application
 FROM base AS build
+ENV NODE_ENV=development
 COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,target=/root/.pnpm-store \
   pnpm install --frozen-lockfile

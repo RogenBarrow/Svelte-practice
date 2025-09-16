@@ -24,7 +24,7 @@ COPY package.json pnpm-lock.yaml ./
 RUN --mount=type=cache,target=/root/.pnpm-store \
   pnpm install --frozen-lockfile
 COPY . .
-RUN pnpm build
+RUN pnpm postinstall && pnpm build
 
 ################################################################################
 # Final runtime image

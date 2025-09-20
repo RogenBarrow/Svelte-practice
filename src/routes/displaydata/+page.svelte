@@ -90,6 +90,51 @@
 </div>
 
 <style>
+    :global(.dark .attendance-grid .gridjs-container),
+    :global(.dark .attendance-grid table.gridjs-table),
+    :global(.dark .attendance-grid th.gridjs-th),
+    :global(.dark .attendance-grid td.gridjs-td),
+    :global(.dark .attendance-grid .gridjs-footer) {
+        background-color: #111827;
+        color: #e5e7eb;
+        border-color: #374151;
+    }
+
+    :global(.dark .attendance-grid th.gridjs-th) {
+        background-color: #1f2937;
+        color: #f3f4f6;
+    }
+
+    :global(.dark .attendance-grid .gridjs-tr:hover td) {
+        background-color: #1f2937;
+    }
+
+    :global(.dark .attendance-grid input.gridjs-input) {
+        background-color: #1f2937;
+        border-color: #4b5563;
+        color: #f9fafb;
+    }
+
+    :global(.dark .attendance-grid input.gridjs-input::placeholder) {
+        color: #9ca3af;
+    }
+
+    :global(.dark .attendance-grid .gridjs-pagination),
+    :global(.dark .attendance-grid .gridjs-pagination .gridjs-summary),
+    :global(.dark .attendance-grid .gridjs-pagination .gridjs-pages button) {
+        color: #e5e7eb;
+    }
+
+    :global(.dark .attendance-grid .gridjs-pagination .gridjs-pages button) {
+        background-color: #1f2937;
+        border-color: #4b5563;
+    }
+
+    :global(.dark .attendance-grid .gridjs-pagination .gridjs-pages button:hover),
+    :global(.dark .attendance-grid .gridjs-pagination .gridjs-pages button.gridjs-currentPage) {
+        background-color: #374151;
+    }
+
     @media (max-width: 640px) {
         .attendance-grid :global(th:nth-child(1)),
         .attendance-grid :global(th:nth-child(3)),
@@ -103,5 +148,23 @@
         .attendance-grid :global(td:nth-child(6)) {
             display: none !important;
         }
+    }
+
+    :global([data-theme='modern-dark'] .attendance-grid .gridjs-container),
+    :global([data-theme='modern-dark'] .attendance-grid table.gridjs-table),
+    :global([data-theme='modern-dark'] .attendance-grid th.gridjs-th),
+    :global([data-theme='modern-dark'] .attendance-grid td.gridjs-td),
+    :global([data-theme='modern-dark'] .attendance-grid .gridjs-footer) {
+        background-color: var(--theme-surface);
+        color: var(--theme-on-surface);
+        border-color: var(--theme-outline);
+    }
+
+    :global([data-theme='modern-dark'] .attendance-grid .gridjs-tr:hover td) {
+        background-color: color-mix(
+            in srgb,
+            var(--theme-surface) 90%,
+            white 10%
+        );
     }
 </style>

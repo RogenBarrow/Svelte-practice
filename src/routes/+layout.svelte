@@ -4,141 +4,103 @@
     import img from '$lib/img/Arise.png';
     import { LightSwitch } from '@skeletonlabs/skeleton';
     import BottomBar from '$lib/components/bottomBar.svelte';
+    import { page } from '$app/stores';
+
+    const navLinks = [
+        { href: '/', label: 'Home' },
+        { href: '/form', label: 'Submit Attendance' },
+        { href: '/displaydata', label: 'Report' },
+    ];
+
+    let mobileOpen = false;
+    const toggleMobile = () => (mobileOpen = !mobileOpen);
+    const closeMobile = () => (mobileOpen = false);
 </script>
 
 <AppShell>
-    <nav class="bg-white justify-center">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div class="relative flex h-16 items-center justify-between">
-                <div
-                    class="absolute inset-y-0 left-0 flex items-center sm:hidden"
+    <nav
+        class="sticky top-0 z-30 backdrop-blur bg-white/80 shadow-sm border-b border-white/40"
+    >
+        <div class="flex h-16 items-center px-4 sm:px-6 lg:px-8">
+            <a class="flex items-center gap-3" href="/">
+                <img class="h-9 w-auto" src={img} alt="Arise Education" />
+            </a>
+
+            <button
+                class="ml-auto flex h-10 w-10 items-center justify-center rounded-md border border-slate-200 text-slate-600 transition hover:border-slate-300 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-purple-400 sm:hidden"
+                aria-label="Toggle navigation"
+                on:click={toggleMobile}
+            >
+                <svg
+                    class:hidden={mobileOpen}
+                    class="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
                 >
-                    <!-- Mobile menu button-->
-                    <button
-                        type="button"
-                        class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                        aria-controls="mobile-menu"
-                        aria-expanded="false"
-                        aria-label="Toggle navigation"
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.6"
+                        d="M4 6h12M4 10h12M4 14h12"
+                    />
+                </svg>
+                <svg
+                    class:hidden={!mobileOpen}
+                    class="h-5 w-5"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.6"
+                        d="M6 6l8 8M6 14L14 6"
+                    />
+                </svg>
+            </button>
+
+            <div class="hidden flex-1 items-center sm:ml-10 sm:flex">
+                <div class="flex items-center gap-6">
+                    {#each navLinks as link}
+                        <a
+                            href={link.href}
+                            class="relative text-sm font-medium tracking-wide transition hover:text-purple-600"
+                            class:text-purple-600={$page.url.pathname === link.href}
+                        >
+                            {link.label}
+                            {#if $page.url.pathname === link.href}
+                                <span
+                                    class="absolute inset-x-0 -bottom-2 h-0.5 rounded-full bg-gradient-to-r from-purple-400 to-purple-600"
+                                ></span>
+                            {/if}
+                        </a>
+                    {/each}
+                </div>
+                <LightSwitch class="ml-auto" />
+            </div>
+        </div>
+
+        {#if mobileOpen}
+            <div
+                class="border-t border-slate-200 bg-white/95 px-4 pb-4 pt-3 shadow-sm sm:hidden"
+            >
+                {#each navLinks as link}
+                    <a
+                        href={link.href}
+                        class="block rounded-md px-3 py-2 text-base font-semibold text-slate-700 transition hover:bg-slate-100"
+                        class:bg-purple-50={$page.url.pathname === link.href}
+                        on:click={closeMobile}
                     >
-                        <span class="sr-only">Open main menu</span>
-                        <!-- Icons: Menu closed (default) and open -->
-                        <svg
-                            class="block h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                            />
-                        </svg>
-                        <svg
-                            class="hidden h-6 w-6"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            aria-hidden="true"
-                        >
-                            <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                d="M6 18L18 6M6 6l12 12"
-                            />
-                        </svg>
-                    </button>
-                </div>
-                <div
-                    class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start"
-                >
-                    <div class="flex flex-shrink-0 items-center">
-                        <img class="h-8 w-auto" src={img} alt="Your Company" />
-                    </div>
-                    <div class="hidden sm:ml-6 sm:block">
-                        <div class="flex space-x-4">
-                            <a
-                                href="/"
-                                class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
-                                aria-current="page">Home</a
-                            >
-                            <a
-                                href="/form"
-                                class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
-                                >Submit Attendance</a
-                            >
-                            <a
-                                href="/displaydata"
-                                class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
-                                >Report</a
-                            >
-                        </div>
-                    </div>
-                    <div class=" flex flex-right items-right"></div>
-                </div>
-                <div
-                    class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0"
-                >
-                    <!-- Profile dropdown (optional) -->
+                        {link.label}
+                    </a>
+                {/each}
+                <div class="mt-3 flex justify-start">
+                    <LightSwitch class="justify-start" />
                 </div>
             </div>
-        </div>
-        <!-- Mobile menu, hidden by default -->
-        <div class="sm:hidden hidden" id="mobile-menu">
-            <div class="space-y-1 px-2 pb-3 pt-2">
-                <a
-                    href="/"
-                    class="text-purple-950 rounded-md px-3 py-2 text-base font-bold ml-10"
-                    aria-current="page">Home</a
-                >
-                <a
-                    href="/form"
-                    class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
-                    >Submission Form</a
-                >
-                <a
-                    href="/displaydata"
-                    class="text-purple-950 rounded-md px-3 py-2 text-base font-bold"
-                    >Report</a
-                >
-            </div>
-        </div>
-        <script lang="ts">
-            document.addEventListener('DOMContentLoaded', () => {
-                const mobileMenuButton = document.querySelector(
-                    '[aria-controls="mobile-menu"]'
-                )!;
-                const mobileMenu = document.getElementById('mobile-menu')!;
-                const svgIcons = mobileMenuButton.querySelectorAll('svg');
-                const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-
-                const toggleMenu = () => {
-                    const isExpanded =
-                        mobileMenuButton.getAttribute('aria-expanded') ===
-                        'true';
-                    mobileMenuButton.setAttribute(
-                        'aria-expanded',
-                        String(!isExpanded)
-                    );
-                    mobileMenu.classList.toggle('hidden');
-                    svgIcons.forEach((icon) => icon.classList.toggle('hidden'));
-                };
-
-                mobileMenuButton.addEventListener('click', toggleMenu);
-
-                mobileMenuLinks.forEach((link) => {
-                    link.addEventListener('click', () => {
-                        if (!mobileMenu.classList.contains('hidden')) {
-                            toggleMenu();
-                        }
-                    });
-                });
-            });
-        </script>
+        {/if}
     </nav>
 
     <slot />

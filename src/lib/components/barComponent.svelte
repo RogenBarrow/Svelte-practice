@@ -22,7 +22,10 @@
 
         const months = Array.from({ length: 12 }, (_, index) => {
             const monthNumber = index + 1;
-            const key = `${selectedYear}-${String(monthNumber).padStart(2, '0')}`;
+            const key = `${selectedYear}-${String(monthNumber).padStart(
+                2,
+                '0'
+            )}`;
             return {
                 key,
                 label: new Date(selectedYear, index, 1).toLocaleString(
@@ -78,7 +81,7 @@
     });
 </script>
 
-<div class="flex flex-col items-center gap-4">
+<div class="flex flex-col items-center gap-4 mt-5">
     <select
         class="select w-full max-w-xs"
         aria-label="Select year"

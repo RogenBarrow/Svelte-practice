@@ -130,8 +130,16 @@
         border-color: #4b5563;
     }
 
-    :global(.dark .attendance-grid .gridjs-pagination .gridjs-pages button:hover),
-    :global(.dark .attendance-grid .gridjs-pagination .gridjs-pages button.gridjs-currentPage) {
+    :global(
+            .dark .attendance-grid .gridjs-pagination .gridjs-pages button:hover
+        ),
+    :global(
+            .dark
+                .attendance-grid
+                .gridjs-pagination
+                .gridjs-pages
+                button.gridjs-currentPage
+        ) {
         background-color: #374151;
     }
 

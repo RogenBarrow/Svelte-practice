@@ -1,4 +1,5 @@
-import deleteRowByiD from '$lib/components/server/database/deleteRowById';
+
+import deleteViewsRowByiD from '$lib/components/server/database/deleteViewRowById';
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
@@ -9,7 +10,7 @@ export async function POST({ request }) {
     }
 
     try {
-        await deleteRowByiD(id);
+        await deleteViewsRowByiD(id);
         return new Response(null, { status: 204 });
     } catch (err) {
         console.error('Delete error', err);

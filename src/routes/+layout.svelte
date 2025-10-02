@@ -10,6 +10,7 @@
         { href: '/', label: 'Home' },
         { href: '/form', label: 'Submit Attendance' },
         { href: '/displaydata', label: 'Report' },
+        { href: '/onlineviewtable', label: 'Views Table' },
     ];
 
     let mobileOpen = false;
@@ -67,7 +68,8 @@
                         <a
                             href={link.href}
                             class="relative text-sm font-medium tracking-wide transition hover:text-purple-600"
-                            class:text-purple-600={$page.url.pathname === link.href}
+                            class:text-purple-600={$page.url.pathname ===
+                                link.href}
                         >
                             {link.label}
                             {#if $page.url.pathname === link.href}

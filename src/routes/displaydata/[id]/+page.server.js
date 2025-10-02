@@ -29,7 +29,6 @@ export const actions = {
 
         const amount = sumOfAll(actNumber, actNumberKids, actNumberKidsleaders);
 
-        console.log('The object data: ', obj, insertData);
 
         const { error } = await supabase
             .from(ATTENDANCE_TABLE)
